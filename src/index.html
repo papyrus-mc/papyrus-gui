@@ -1,14 +1,19 @@
 <head>
     <link rel="stylesheet" type="text/css" href="skeleton/css/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="css/skeleton_extended-buttons.css">
+    <link rel="stylesheet" type="text/css" href="css/no-select.css">
+    <style>
+    
+    </style>
 </head>
 <body>
-    <h3>papyrus</h3>
     <div class="container">
+        Please choose a input and output directory.
         <div class="row">
                 <div class="ten columns">
                     <input class="u-full-width" type="text" placeholder="<path to world directory>" id="inputWorld">
                 </div>
-                <div class="two columns">
+                <div class="two columns noselect">
                     <button>Select</button>
                 </div>
         </div>
@@ -16,14 +21,11 @@
                 <div class="ten columns">
                     <input class="u-full-width" type="text" placeholder="<path to output directory>" id="inputOutput">
                 </div>
-                <div class="two columns">
+                <div class="two columns noselect">
                     <button>Select</button>
                 </div>
         </div>
-        <div class="row"></div>
-        <div class="u-full-width">
-            <input class="button-primary" type="button" value="Render!">
-        </div>
+        <input class="button button-primary button-block noselect" type="button" value="Render!">
     </div>
     
 </body>
