@@ -9,10 +9,3 @@ The graphical user interface is as easy as it gets. Choose an input path for you
 
 ## Installation
 You can grab pre-build binaries for Windows and Linux in the [releases-tab](https://github.com/clarkx86/papyrus-gui/releases).
-If you want to build from source, simply clone this repository and run:
-```
-npm install
-```
-
-## Dependencies
-[Electron](https://electronjs.org/) and [Skeleton](http://getskeleton.com/).
