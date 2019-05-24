@@ -1,4 +1,6 @@
-﻿language: csharp
+os:
+  - linux
+language: csharp
 mono:
-	- latest
+  - latest
 solution: papyrus-gui.sln
