@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +15,12 @@ namespace papyrus_gui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new form_main());
+        }
+
+        public static void Render()
+        {
+            Console.WriteLine("Rendering.");
         }
     }
 }
