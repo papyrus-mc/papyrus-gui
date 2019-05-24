@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
+using System.IO;
 
 namespace papyrus_gui
 {
@@ -57,6 +59,31 @@ namespace papyrus_gui
 
         private void ButtonRender_Click(object sender, EventArgs e)
         {
+            if (System.IO.Directory.Exists(textBox1.Text.ToString()) && System.IO.Directory.Exists(textBox2.Text.ToString()))
+            {
+                switch (comboBoxVersion.SelectedIndex)
+                {
+                    // .cs
+                    case 0:
+                        Process process = new Process();
+                        process.StartInfo.FileName = form_configure.pathExeCS;
+                        process.StartInfo.Arguments = String.Format(@"-w "+"{0}"+@" -o"+"{1} --htmlfile {2}", textBox1.Text, textBox2.Text);
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.RedirectStandardOutput = true;
+                        process.Start();
+
+                        richTextBoxConsoleOutput.Text = process.StandardOutput.ReadToEnd();
+                        process.WaitForExit();
+                        break;
+
+                    // .js
+                    case 1:
+                        break;
+                }
+            } else
+            {
+                MessageBox.Show("World and/ or output directory is invalid or does not exist.", "Invalid directory", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void DiscordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,6 +94,17 @@ namespace papyrus_gui
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            var formConfigure = new form_configure();
+            formConfigure.Show();
+        }
+
+        private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86", "1.0"), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
