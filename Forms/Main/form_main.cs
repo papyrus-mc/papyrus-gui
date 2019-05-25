@@ -65,15 +65,8 @@ namespace papyrus_gui
                 {
                     // .cs
                     case 0:
-                        Process process = new Process();
-                        process.StartInfo.FileName = form_configure.pathExeCS;
-                        process.StartInfo.Arguments = String.Format(@"-w "+"{0}"+@" -o"+"{1} --htmlfile {2}", textBox1.Text, textBox2.Text);
-                        process.StartInfo.UseShellExecute = false;
-                        process.StartInfo.RedirectStandardOutput = true;
-                        process.Start();
-
-                        richTextBoxConsoleOutput.Text = process.StandardOutput.ReadToEnd();
-                        process.WaitForExit();
+                        var threadRender = new System.Threading.Thread(new System.Threading.ThreadStart(renderCS));
+                        threadRender.Start();
                         break;
 
                     // .js
@@ -84,6 +77,19 @@ namespace papyrus_gui
             {
                 MessageBox.Show("World and/ or output directory is invalid or does not exist.", "Invalid directory", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void renderCS()
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = form_configure.pathExeCS;
+            process.StartInfo.Arguments = String.Format(@"-w " + "{0}" + @" -o" + "{1}", Path.GetFullPath(textBox1.Text.ToString()), Path.GetFullPath(textBox2.Text.ToString()));
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.Start();
+
+            richTextBoxConsoleOutput.Text = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
         }
 
         private void DiscordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +110,7 @@ namespace papyrus_gui
 
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86", "1.0"), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86 & DeepBlue4200", "1.0"), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

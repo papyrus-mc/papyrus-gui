@@ -39,6 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxArgumentsPreview = new System.Windows.Forms.TextBox();
             this.textBoxHTMLFileName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.checkBoxHeightmap = new System.Windows.Forms.CheckBox();
@@ -69,13 +71,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxExeCS.Location = new System.Drawing.Point(165, 13);
             this.textBoxExeCS.Name = "textBoxExeCS";
-            this.textBoxExeCS.Size = new System.Drawing.Size(186, 20);
+            this.textBoxExeCS.Size = new System.Drawing.Size(94, 20);
             this.textBoxExeCS.TabIndex = 1;
             // 
             // buttonBrowse1
             // 
             this.buttonBrowse1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowse1.Location = new System.Drawing.Point(357, 13);
+            this.buttonBrowse1.Location = new System.Drawing.Point(265, 13);
             this.buttonBrowse1.Name = "buttonBrowse1";
             this.buttonBrowse1.Size = new System.Drawing.Size(62, 20);
             this.buttonBrowse1.TabIndex = 3;
@@ -87,7 +89,7 @@
             // 
             this.labelStatusExeCS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStatusExeCS.AutoSize = true;
-            this.labelStatusExeCS.Location = new System.Drawing.Point(425, 16);
+            this.labelStatusExeCS.Location = new System.Drawing.Point(333, 16);
             this.labelStatusExeCS.Name = "labelStatusExeCS";
             this.labelStatusExeCS.Size = new System.Drawing.Size(54, 13);
             this.labelStatusExeCS.TabIndex = 4;
@@ -108,7 +110,7 @@
             // 
             this.labelStatusExeJS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStatusExeJS.AutoSize = true;
-            this.labelStatusExeJS.Location = new System.Drawing.Point(425, 42);
+            this.labelStatusExeJS.Location = new System.Drawing.Point(333, 42);
             this.labelStatusExeJS.Name = "labelStatusExeJS";
             this.labelStatusExeJS.Size = new System.Drawing.Size(54, 13);
             this.labelStatusExeJS.TabIndex = 9;
@@ -117,7 +119,7 @@
             // buttonBrowse2
             // 
             this.buttonBrowse2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowse2.Location = new System.Drawing.Point(357, 39);
+            this.buttonBrowse2.Location = new System.Drawing.Point(265, 39);
             this.buttonBrowse2.Name = "buttonBrowse2";
             this.buttonBrowse2.Size = new System.Drawing.Size(62, 20);
             this.buttonBrowse2.TabIndex = 8;
@@ -131,7 +133,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxExeJS.Location = new System.Drawing.Point(165, 39);
             this.textBoxExeJS.Name = "textBoxExeJS";
-            this.textBoxExeJS.Size = new System.Drawing.Size(186, 20);
+            this.textBoxExeJS.Size = new System.Drawing.Size(94, 20);
             this.textBoxExeJS.TabIndex = 7;
             // 
             // label5
@@ -158,7 +160,7 @@
             this.groupBox1.Controls.Add(this.labelStatusExeCS);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(485, 102);
+            this.groupBox1.Size = new System.Drawing.Size(393, 102);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "papyrus configuration";
@@ -168,6 +170,8 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.textBoxArgumentsPreview);
             this.groupBox2.Controls.Add(this.textBoxHTMLFileName);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.checkBoxHeightmap);
@@ -181,15 +185,34 @@
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Location = new System.Drawing.Point(12, 120);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(485, 137);
+            this.groupBox2.Size = new System.Drawing.Size(393, 160);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Additional arguments";
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 137);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Arguments:";
+            // 
+            // textBoxArgumentsPreview
+            // 
+            this.textBoxArgumentsPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxArgumentsPreview.Location = new System.Drawing.Point(72, 134);
+            this.textBoxArgumentsPreview.Name = "textBoxArgumentsPreview";
+            this.textBoxArgumentsPreview.ReadOnly = true;
+            this.textBoxArgumentsPreview.Size = new System.Drawing.Size(315, 20);
+            this.textBoxArgumentsPreview.TabIndex = 11;
+            // 
             // textBoxHTMLFileName
             // 
-            this.textBoxHTMLFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxHTMLFileName.Location = new System.Drawing.Point(178, 97);
+            this.textBoxHTMLFileName.Location = new System.Drawing.Point(123, 97);
             this.textBoxHTMLFileName.Name = "textBoxHTMLFileName";
             this.textBoxHTMLFileName.Size = new System.Drawing.Size(129, 20);
             this.textBoxHTMLFileName.TabIndex = 10;
@@ -216,9 +239,8 @@
             // 
             // labelLimitY
             // 
-            this.labelLimitY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelLimitY.AutoSize = true;
-            this.labelLimitY.Location = new System.Drawing.Point(175, 46);
+            this.labelLimitY.Location = new System.Drawing.Point(120, 46);
             this.labelLimitY.Name = "labelLimitY";
             this.labelLimitY.Size = new System.Drawing.Size(17, 13);
             this.labelLimitY.TabIndex = 7;
@@ -226,8 +248,7 @@
             // 
             // textBoxLimitY
             // 
-            this.textBoxLimitY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLimitY.Location = new System.Drawing.Point(198, 43);
+            this.textBoxLimitY.Location = new System.Drawing.Point(143, 43);
             this.textBoxLimitY.Name = "textBoxLimitY";
             this.textBoxLimitY.Size = new System.Drawing.Size(40, 20);
             this.textBoxLimitY.TabIndex = 6;
@@ -245,9 +266,8 @@
             // 
             // labelLimitZ
             // 
-            this.labelLimitZ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelLimitZ.AutoSize = true;
-            this.labelLimitZ.Location = new System.Drawing.Point(244, 20);
+            this.labelLimitZ.Location = new System.Drawing.Point(189, 20);
             this.labelLimitZ.Name = "labelLimitZ";
             this.labelLimitZ.Size = new System.Drawing.Size(17, 13);
             this.labelLimitZ.TabIndex = 4;
@@ -255,8 +275,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(267, 17);
+            this.textBox2.Location = new System.Drawing.Point(212, 17);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(40, 20);
             this.textBox2.TabIndex = 3;
@@ -264,9 +283,8 @@
             // 
             // labelLimitX
             // 
-            this.labelLimitX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelLimitX.AutoSize = true;
-            this.labelLimitX.Location = new System.Drawing.Point(175, 20);
+            this.labelLimitX.Location = new System.Drawing.Point(120, 20);
             this.labelLimitX.Name = "labelLimitX";
             this.labelLimitX.Size = new System.Drawing.Size(17, 13);
             this.labelLimitX.TabIndex = 2;
@@ -274,8 +292,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(198, 17);
+            this.textBox1.Location = new System.Drawing.Point(143, 17);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(40, 20);
             this.textBox1.TabIndex = 1;
@@ -295,7 +312,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 269);
+            this.ClientSize = new System.Drawing.Size(417, 292);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "form_configure";
@@ -332,5 +349,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.TextBox textBoxHTMLFileName;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxArgumentsPreview;
     }
 }

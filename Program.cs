@@ -17,10 +17,5 @@ namespace papyrus_gui
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new form_main());
         }
-
-        public static void Render()
-        {
-            Console.WriteLine("Rendering.");
-        }
     }
 }
