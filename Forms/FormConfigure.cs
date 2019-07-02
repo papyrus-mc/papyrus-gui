@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace papyrus_gui
 {
-    public partial class form_configure : Form
+    public partial class FormConfigure : Form
     {
         public static string pathExeCS, pathExeJS;
         int    limitX, limitY, limitZ;
 
-        public form_configure()
+        public FormConfigure()
         {
             InitializeComponent();
             textBoxExeJS.Enabled = false;

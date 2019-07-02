@@ -32,7 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>papyrus-gui_logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,25 +52,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Configure\form_configure.cs">
+    <Compile Include="Forms\FormConfigure.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Configure\form_configure.Designer.cs">
-      <DependentUpon>form_configure.cs</DependentUpon>
+    <Compile Include="Forms\FormConfigure.Designer.cs">
+      <DependentUpon>FormConfigure.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Main\form_main.cs">
+    <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Main\form_main.Designer.cs">
-      <DependentUpon>form_main.cs</DependentUpon>
+    <Compile Include="Forms\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Configure\form_configure.resx">
-      <DependentUpon>form_configure.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormConfigure.resx">
+      <DependentUpon>FormConfigure.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\form_main.resx">
-      <DependentUpon>form_main.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -76,6 +82,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include=".travis.yml" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,6 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="papyrus-gui_logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
