@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/1d0o9pkci9c37esa?svg=true)](https://ci.appveyor.com/project/clarkx86/papyrus-gui) [![Discord](https://img.shields.io/discord/569841820092203011.svg?logo=discord&logoColor=white)](https://discord.gg/J2sBaXa)
+[![Build status](https://ci.appveyor.com/api/projects/status/de0a189g6farlk2q?svg=true)](https://ci.appveyor.com/project/clarkx86/papyrus-gui) [![Discord](https://img.shields.io/discord/569841820092203011.svg?logo=discord&logoColor=white)](https://discord.gg/J2sBaXa)
 # papyrus.gui
 A graphical user interface for papyrus, made for those who fear the terminal.
 
