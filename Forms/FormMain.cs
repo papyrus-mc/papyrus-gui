@@ -129,7 +129,7 @@ namespace papyrus_gui
 
             string arguments = String.Format(@"-w {0} -o {1} --dim {2} -f {3} {4} --brillouin_j {5} --brillouin_divider {6} --brillouin_offset {7} --forceoverwrite {8} --use_leaflet_legacy {9} --htmlfile {10} {11}", Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString()), settings.config_cs["dimension"], settings.config_cs["image_format"].ToString().ToLower(), settings.config_cs["image_quality"], settings.config_cs["heightmap_j"], settings.config_cs["heightmap_divider"], settings.config_cs["heightmap_offset"], settings.config_cs["force_overwrite"], settings.config_cs["leaflet"], settings.config_cs["html_filename"], argumentProfile);
             var renderThread = new RenderThread(this, arguments);
-            MessageBox.Show(FormMain.settings.config_cs["executable"] + " " + arguments);
+            //MessageBox.Show(FormMain.settings.config_cs["executable"] + " " + arguments);
         }
 
     }
