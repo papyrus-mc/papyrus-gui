@@ -15,10 +15,12 @@ namespace papyrus_gui
         public ConsoleHandler updateConsole;
         public FormConfigure formConfigure;
         public static Settings settings;
+        public static string AppVersion = String.Format("{0}.{1}.{2}", Assembly.GetExecutingAssembly().GetName().Version.Major, Assembly.GetExecutingAssembly().GetName().Version.Minor, Assembly.GetExecutingAssembly().GetName().Version.Build);
 
         public FormMain()
         {
             InitializeComponent();
+            this.Text = this.Text + " v" + AppVersion;
             comboBoxVersion.SelectedIndex = 0;
             textBoxWorld.Text = @":\Users\%username%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\";
             Application.ApplicationExit += new EventHandler(CloseApplication);
@@ -28,8 +30,9 @@ namespace papyrus_gui
             if (File.Exists(configProfile))
             {
                 settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(configProfile));
-                textBoxWorld.Text = settings.paths["world"];
-                textBoxOutput.Text = settings.paths["output"];
+                comboBoxVersion.SelectedIndex = (int)settings.config["variant"];
+                textBoxWorld.Text = settings.config["world"];
+                textBoxOutput.Text = settings.config["output"];
             } else
             {
                 settings = new Settings();
@@ -39,6 +42,7 @@ namespace papyrus_gui
 
         private void CloseApplication(object sender, EventArgs e)
         {
+            settings.config["variant"] = comboBoxVersion.SelectedIndex;
             using (StreamWriter streamWriter = new StreamWriter(@".\configuration.json", false))
             {
                 streamWriter.Write(JsonConvert.SerializeObject(settings));
@@ -56,28 +60,24 @@ namespace papyrus_gui
             if ( folderBrowserInput.ShowDialog() == DialogResult.OK )
             {
                 textBoxWorld.Text = folderBrowserInput.SelectedPath;
-                settings.paths["world"] = textBoxWorld.Text;
+                //settings.config["world"] = textBoxWorld.Text;
             }
         }
         private void ButtonSelect2_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserOutput = new FolderBrowserDialog();
 
-            if (textBoxOutput.Text != "")
-            {
-                folderBrowserOutput.SelectedPath = textBoxOutput.Text;
-            } else {
-                folderBrowserOutput.SelectedPath = "";
-            }
-
             if (folderBrowserOutput.ShowDialog() == DialogResult.OK)
             {
                 textBoxOutput.Text = folderBrowserOutput.SelectedPath;
-                settings.paths["output"] = textBoxOutput.Text;
+                //settings.config["output"] = textBoxOutput.Text;
             }
         }
         private void ButtonRender_Click(object sender, EventArgs e)
         {
+            settings.config["world"] = textBoxWorld.Text;
+            settings.config["output"] = textBoxOutput.Text;
+
             if (Directory.Exists(textBoxWorld.Text.ToString()) && Directory.Exists(textBoxOutput.Text.ToString()))
             {
                 switch (comboBoxVersion.SelectedIndex)
@@ -115,7 +115,7 @@ namespace papyrus_gui
         }
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86 & DeepBlue4200", Assembly.GetExecutingAssembly().GetName().Version), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86 & DeepBlue4200", AppVersion, "About", MessageBoxButtons.OK, MessageBoxIcon.Information));
         }
         private void renderCS()
         {
@@ -166,13 +166,14 @@ namespace papyrus_gui
 
     public class Settings
     {
-        public Dictionary<string, string> paths = new Dictionary<string, string>();
+        public Dictionary<string, dynamic> config = new Dictionary<string, dynamic>();
         public Dictionary<string, dynamic> config_cs = new Dictionary<string, dynamic>();
 
         public Settings()
         {
-            this.paths["world"] = @"C:/Users/%username%/AppData/Local/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/games/com.mojang/minecraftWorlds/";
-            this.paths["output"] = "";
+            this.config["variant"] = 0;
+            this.config["world"] = @"C:/Users/%username%/AppData/Local/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/games/com.mojang/minecraftWorlds/";
+            this.config["output"] = "";
             //
             this.config_cs["executable"] = "";
             this.config_cs["limitXZ_enable"] = false;

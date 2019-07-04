@@ -14,7 +14,6 @@ namespace papyrus_gui
     public partial class FormConfigure : Form
     {
         public static string pathExeCS, pathExeJS;
-        private int limitX, limitY, limitZ;
 
         public FormConfigure()
         {
