@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Reflection;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace papyrus_gui
 {
@@ -11,53 +13,72 @@ namespace papyrus_gui
     {
         public delegate void ConsoleHandler(string stdOut);
         public ConsoleHandler updateConsole;
+        public FormConfigure formConfigure;
+        public static Settings settings;
 
         public FormMain()
         {
             InitializeComponent();
             comboBoxVersion.SelectedIndex = 0;
-            textBox1.Text = @":\Users\%username%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\";
+            textBoxWorld.Text = @":\Users\%username%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\";
+            Application.ApplicationExit += new EventHandler(CloseApplication);
+
+            // Load settings
+            var configProfile = @".\configuration.json";
+            if (File.Exists(configProfile))
+            {
+                settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(configProfile));
+                textBoxWorld.Text = settings.paths["world"];
+                textBoxOutput.Text = settings.paths["output"];
+            } else
+            {
+                settings = new Settings();
+            }
+            formConfigure = new FormConfigure();
         }
 
+        private void CloseApplication(object sender, EventArgs e)
+        {
+            using (StreamWriter streamWriter = new StreamWriter(@".\configuration.json", false))
+            {
+                streamWriter.Write(JsonConvert.SerializeObject(settings));
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            formConfigure.Show();
+        }
         private void ButtonSelect1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserInput = new FolderBrowserDialog();
 
-            if (textBox1.Text != "")
-            {
-                folderBrowserInput.SelectedPath = textBox1.Text;
-            }
-            else
-            {
-                folderBrowserInput.SelectedPath = @"C:\Users\%username%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\";
-            }
-
             if ( folderBrowserInput.ShowDialog() == DialogResult.OK )
             {
-                textBox1.Text = folderBrowserInput.SelectedPath;
+                textBoxWorld.Text = folderBrowserInput.SelectedPath;
+                settings.paths["world"] = textBoxWorld.Text;
             }
         }
-
         private void ButtonSelect2_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserOutput = new FolderBrowserDialog();
 
-            if (textBox2.Text != "")
+            if (textBoxOutput.Text != "")
             {
-                folderBrowserOutput.SelectedPath = textBox2.Text;
+                folderBrowserOutput.SelectedPath = textBoxOutput.Text;
             } else {
                 folderBrowserOutput.SelectedPath = "";
             }
 
             if (folderBrowserOutput.ShowDialog() == DialogResult.OK)
             {
-                textBox2.Text = folderBrowserOutput.SelectedPath;
+                textBoxOutput.Text = folderBrowserOutput.SelectedPath;
+                settings.paths["output"] = textBoxOutput.Text;
             }
         }
-
         private void ButtonRender_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(textBox1.Text.ToString()) && Directory.Exists(textBox2.Text.ToString()))
+            if (Directory.Exists(textBoxWorld.Text.ToString()) && Directory.Exists(textBoxOutput.Text.ToString()))
             {
                 switch (comboBoxVersion.SelectedIndex)
                 {
@@ -78,40 +99,42 @@ namespace papyrus_gui
                 MessageBox.Show("World and/ or output directory is invalid or does not exist.", "Invalid directory", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         public void UpdateConsole(string stdOut)
         {
-            richTextBoxConsoleOutput.Text += "\n" + stdOut;
+            richTextBoxConsoleOutput.Text += stdOut + "\n";
+            richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.Text.Length;
+            richTextBoxConsoleOutput.ScrollToCaret();
         }
-
-        private void renderCS()
-        {
-            var renderThread = new RenderThread(this, String.Format(@"-w {0} -o {1}", Path.GetFullPath(textBox1.Text.ToString()), Path.GetFullPath(textBox2.Text.ToString())));
-        }
-
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            var formConfigure = new FormConfigure();
-            formConfigure.Show();
-        }
-
-        private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86 & DeepBlue4200", Assembly.GetExecutingAssembly().GetName().Version), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void DiscordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(@"https://discordapp.com/invite/J2sBaXa");
         }
+        private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86 & DeepBlue4200", Assembly.GetExecutingAssembly().GetName().Version), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void renderCS()
+        {
+            //var renderThread = new RenderThread(this, String.Format(@"-w {0} -o {1}", Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString())));
+            string argumentProfile = "";
+
+            if (settings.config_cs["profile"].ToLower() != "default")
+            {
+                argumentProfile = String.Format("--profile {0}", settings.config_cs["profile"].ToLower());
+            }
+
+            string arguments = String.Format(@"-w {0} -o {1} --dim {2} -f {3} {4} --brillouin_j {5} --brillouin_divider {6} --brillouin_offset {7} --forceoverwrite {8} --use_leaflet_legacy {9} --htmlfile {10} {11}", Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString()), settings.config_cs["dimension"], settings.config_cs["image_format"].ToString().ToLower(), settings.config_cs["image_quality"], settings.config_cs["heightmap_j"], settings.config_cs["heightmap_divider"], settings.config_cs["heightmap_offset"], settings.config_cs["force_overwrite"], settings.config_cs["leaflet"], settings.config_cs["html_filename"], argumentProfile);
+            var renderThread = new RenderThread(this, arguments);
+            MessageBox.Show(FormMain.settings.config_cs["executable"] + " " + arguments);
+        }
+
     }
 
-    public class RenderThread
+    internal class RenderThread
     {
         private FormMain mainForm;
         private Process process;
@@ -121,7 +144,7 @@ namespace papyrus_gui
             this.mainForm = mainForm;
 
             process = new Process();
-            process.StartInfo.FileName = FormConfigure.pathExeCS;
+            process.StartInfo.FileName = FormMain.settings.config_cs["executable"];
             process.StartInfo.Arguments = arguments;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
@@ -132,11 +155,44 @@ namespace papyrus_gui
             process.BeginOutputReadLine();
 
             process.OutputDataReceived += InvokeUpdate;
+
         }
 
         private void InvokeUpdate(object sender, DataReceivedEventArgs e)
         {
             mainForm.Invoke(mainForm.updateConsole, e.Data);
+        }
+    }
+
+    public class Settings
+    {
+        public Dictionary<string, string> paths = new Dictionary<string, string>();
+        public Dictionary<string, dynamic> config_cs = new Dictionary<string, dynamic>();
+
+        public Settings()
+        {
+            this.paths["world"] = @"C:/Users/%username%/AppData/Local/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/games/com.mojang/minecraftWorlds/";
+            this.paths["output"] = "";
+            //
+            this.config_cs["executable"] = "";
+            this.config_cs["limitXZ_enable"] = false;
+            this.config_cs["limitXZ_X1"] = 0;
+            this.config_cs["limitXZ_X2"] = 0;
+            this.config_cs["limitXZ_Z1"] = 0;
+            this.config_cs["limitXZ_Z2"] = 0;
+            this.config_cs["limitY_enable"] = false;
+            this.config_cs["limitY"] = 64;
+            this.config_cs["heightmap_enable"] = true;
+            this.config_cs["heightmap_j"] = 10000;
+            this.config_cs["heightmap_divider"] = 20;
+            this.config_cs["heightmap_offset"] = 64;
+            this.config_cs["dimension"] = 0;
+            this.config_cs["profile"] = "Default";
+            this.config_cs["html_filename"] = "index.html";
+            this.config_cs["image_format"] = "PNG";
+            this.config_cs["image_quality"] = 100;
+            this.config_cs["force_overwrite"] = false;
+            this.config_cs["leaflet"] = false;
         }
     }
 }

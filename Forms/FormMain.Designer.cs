@@ -39,10 +39,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxVersion = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxWorld = new System.Windows.Forms.TextBox();
             this.buttonSelect1 = new System.Windows.Forms.Button();
             this.buttonSelect2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxOutput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.richTextBoxConsoleOutput = new System.Windows.Forms.RichTextBox();
@@ -142,15 +142,15 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "World Folder:";
             // 
-            // textBox1
+            // textBoxWorld
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxWorld.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(136, 66);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(681, 22);
-            this.textBox1.TabIndex = 4;
+            this.textBoxWorld.Location = new System.Drawing.Point(136, 66);
+            this.textBoxWorld.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxWorld.Name = "textBoxWorld";
+            this.textBoxWorld.Size = new System.Drawing.Size(681, 22);
+            this.textBoxWorld.TabIndex = 4;
             // 
             // buttonSelect1
             // 
@@ -176,15 +176,15 @@
             this.buttonSelect2.UseVisualStyleBackColor = true;
             this.buttonSelect2.Click += new System.EventHandler(this.ButtonSelect2_Click);
             // 
-            // textBox2
+            // textBoxOutput
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(136, 102);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(681, 22);
-            this.textBox2.TabIndex = 7;
+            this.textBoxOutput.Location = new System.Drawing.Point(136, 102);
+            this.textBoxOutput.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxOutput.Name = "textBoxOutput";
+            this.textBoxOutput.Size = new System.Drawing.Size(681, 22);
+            this.textBoxOutput.TabIndex = 7;
             // 
             // label3
             // 
@@ -258,10 +258,10 @@
             this.Controls.Add(this.buttonRender);
             this.Controls.Add(this.groupBox);
             this.Controls.Add(this.buttonSelect2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBoxOutput);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonSelect1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxWorld);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxVersion);
             this.Controls.Add(this.label1);
@@ -291,10 +291,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxVersion;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBoxWorld;
         private System.Windows.Forms.Button buttonSelect1;
         private System.Windows.Forms.Button buttonSelect2;
-        private System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox textBoxOutput;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.RichTextBox richTextBoxConsoleOutput;
