@@ -29,7 +29,7 @@ namespace papyrus_gui
             comboBoxImgFormat.SelectedIndex = 0;
 
             #region Load settings
-            pathExeCS = FormMain.settings.config_cs["executable"];
+            pathExeCS = FormMain.Settings.config_cs["executable"];
             if (File.Exists(pathExeCS))
             {
                 labelStatusExeCS.ForeColor = Color.Green;
@@ -39,24 +39,24 @@ namespace papyrus_gui
                 labelStatusExeCS.ForeColor = Color.Red;
                 labelStatusExeCS.Text = "Invalid";
             }
-            checkBoxLimitXZ.Checked = Convert.ToBoolean(FormMain.settings.config_cs["limitXZ_enable"]);
-            textBoxLimitXZX1.Text = FormMain.settings.config_cs["limitXZ_X1"].ToString();
-            textBoxLimitXZX2.Text = FormMain.settings.config_cs["limitXZ_X2"].ToString();
-            textBoxLimitXZZ1.Text = FormMain.settings.config_cs["limitXZ_Z1"].ToString();
-            textBoxLimitXZZ2.Text = FormMain.settings.config_cs["limitXZ_Z2"].ToString();
-            checkBoxLimitY.Checked = Convert.ToBoolean(FormMain.settings.config_cs["limitY_enable"]);
-            textBoxLimitY.Text = FormMain.settings.config_cs["limitY"].ToString();
-            checkBoxHeightmap.Checked = Convert.ToBoolean(FormMain.settings.config_cs["heightmap_enable"]);
-            textBoxHeightmapJ.Text = FormMain.settings.config_cs["heightmap_j"].ToString();
-            textBoxHeightmapDivider.Text = FormMain.settings.config_cs["heightmap_divider"].ToString();
-            textBoxHeightmapOffset.Text = FormMain.settings.config_cs["heightmap_offset"].ToString();
-            comboBoxDimension.SelectedIndex = (int)FormMain.settings.config_cs["dimension"];
-            comboBoxProfile.SelectedItem = FormMain.settings.config_cs["profile"];
-            textBoxHTMLFilename.Text = FormMain.settings.config_cs["html_filename"];
-            comboBoxImgFormat.SelectedItem = FormMain.settings.config_cs["image_format"];
-            textBoxImgQuality.Text = FormMain.settings.config_cs["image_quality"].ToString();
-            checkBoxForceOverwrite.Checked = Convert.ToBoolean(FormMain.settings.config_cs["force_overwrite"]);
-            checkBoxLeaflet.Checked = Convert.ToBoolean(FormMain.settings.config_cs["leaflet"]);
+            checkBoxLimitXZ.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["limitXZ_enable"]);
+            textBoxLimitXZX1.Text = FormMain.Settings.config_cs["limitXZ_X1"].ToString();
+            textBoxLimitXZX2.Text = FormMain.Settings.config_cs["limitXZ_X2"].ToString();
+            textBoxLimitXZZ1.Text = FormMain.Settings.config_cs["limitXZ_Z1"].ToString();
+            textBoxLimitXZZ2.Text = FormMain.Settings.config_cs["limitXZ_Z2"].ToString();
+            checkBoxLimitY.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["limitY_enable"]);
+            textBoxLimitY.Text = FormMain.Settings.config_cs["limitY"].ToString();
+            checkBoxHeightmap.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["heightmap_enable"]);
+            textBoxHeightmapJ.Text = FormMain.Settings.config_cs["heightmap_j"].ToString();
+            textBoxHeightmapDivider.Text = FormMain.Settings.config_cs["heightmap_divider"].ToString();
+            textBoxHeightmapOffset.Text = FormMain.Settings.config_cs["heightmap_offset"].ToString();
+            comboBoxDimension.SelectedIndex = (int)FormMain.Settings.config_cs["dimension"];
+            comboBoxProfile.SelectedItem = FormMain.Settings.config_cs["profile"];
+            textBoxHTMLFilename.Text = FormMain.Settings.config_cs["html_filename"];
+            comboBoxImgFormat.SelectedItem = FormMain.Settings.config_cs["image_format"];
+            textBoxImgQuality.Text = FormMain.Settings.config_cs["image_quality"].ToString();
+            checkBoxForceOverwrite.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["force_overwrite"]);
+            checkBoxLeaflet.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["leaflet"]);
             #endregion
         }
 
@@ -68,25 +68,25 @@ namespace papyrus_gui
 
                 #region Save Settings
                 #region .cs
-                FormMain.settings.config_cs["executable"] = pathExeCS;
-                FormMain.settings.config_cs["limitXZ_enable"] = checkBoxLimitXZ.Checked;
-                FormMain.settings.config_cs["limitXZ_X1"] = Convert.ToInt32(textBoxLimitXZX1.Text);
-                FormMain.settings.config_cs["limitXZ_X2"] = Convert.ToInt32(textBoxLimitXZX2.Text);
-                FormMain.settings.config_cs["limitXZ_Z1"] = Convert.ToInt32(textBoxLimitXZZ1.Text);
-                FormMain.settings.config_cs["limitXZ_Z2"] = Convert.ToInt32(textBoxLimitXZZ2.Text);
-                FormMain.settings.config_cs["limitY_enable"] = checkBoxLimitY.Checked;
-                FormMain.settings.config_cs["limitY"] = Convert.ToInt32(textBoxLimitY.Text);
-                FormMain.settings.config_cs["heightmap_enable"] = checkBoxHeightmap.Checked;
-                FormMain.settings.config_cs["heightmap_j"] = Convert.ToInt32(textBoxHeightmapJ.Text);
-                FormMain.settings.config_cs["heightmap_divider"] = Convert.ToInt32(textBoxHeightmapDivider.Text);
-                FormMain.settings.config_cs["heightmap_offset"] = Convert.ToInt32(textBoxHeightmapOffset.Text);
-                FormMain.settings.config_cs["dimension"] = comboBoxDimension.SelectedIndex;
-                FormMain.settings.config_cs["profile"] = comboBoxProfile.SelectedItem.ToString();
-                FormMain.settings.config_cs["html_filename"] = textBoxHTMLFilename.Text;
-                FormMain.settings.config_cs["image_format"] = comboBoxImgFormat.SelectedItem.ToString();
-                FormMain.settings.config_cs["image_quality"] = Convert.ToInt32(textBoxImgQuality.Text);
-                FormMain.settings.config_cs["force_overwrite"] = checkBoxForceOverwrite.Checked;
-                FormMain.settings.config_cs["leaflet"] = checkBoxLeaflet.Checked;
+                FormMain.Settings.config_cs["executable"] = pathExeCS;
+                FormMain.Settings.config_cs["limitXZ_enable"] = checkBoxLimitXZ.Checked;
+                FormMain.Settings.config_cs["limitXZ_X1"] = Convert.ToInt32(textBoxLimitXZX1.Text);
+                FormMain.Settings.config_cs["limitXZ_X2"] = Convert.ToInt32(textBoxLimitXZX2.Text);
+                FormMain.Settings.config_cs["limitXZ_Z1"] = Convert.ToInt32(textBoxLimitXZZ1.Text);
+                FormMain.Settings.config_cs["limitXZ_Z2"] = Convert.ToInt32(textBoxLimitXZZ2.Text);
+                FormMain.Settings.config_cs["limitY_enable"] = checkBoxLimitY.Checked;
+                FormMain.Settings.config_cs["limitY"] = Convert.ToInt32(textBoxLimitY.Text);
+                FormMain.Settings.config_cs["heightmap_enable"] = checkBoxHeightmap.Checked;
+                FormMain.Settings.config_cs["heightmap_j"] = Convert.ToInt32(textBoxHeightmapJ.Text);
+                FormMain.Settings.config_cs["heightmap_divider"] = Convert.ToInt32(textBoxHeightmapDivider.Text);
+                FormMain.Settings.config_cs["heightmap_offset"] = Convert.ToInt32(textBoxHeightmapOffset.Text);
+                FormMain.Settings.config_cs["dimension"] = comboBoxDimension.SelectedIndex;
+                FormMain.Settings.config_cs["profile"] = comboBoxProfile.SelectedItem.ToString();
+                FormMain.Settings.config_cs["html_filename"] = textBoxHTMLFilename.Text;
+                FormMain.Settings.config_cs["image_format"] = comboBoxImgFormat.SelectedItem.ToString();
+                FormMain.Settings.config_cs["image_quality"] = Convert.ToInt32(textBoxImgQuality.Text);
+                FormMain.Settings.config_cs["force_overwrite"] = checkBoxForceOverwrite.Checked;
+                FormMain.Settings.config_cs["leaflet"] = checkBoxLeaflet.Checked;
                 #endregion
                 //
                 #region .js
