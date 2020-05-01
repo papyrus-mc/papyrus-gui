@@ -4,29 +4,51 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Reflection;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Timers;
 
 namespace papyrus_gui
 {
-    public partial class FormMain: Form
+    public enum ProcessingStatus
+    {
+        IDLE,
+        RENDERING,
+        CANCELED,
+        FINISHED
+    }
+
+    public enum PapyrusVariant
+    {
+        PAPYRUSCS,
+        PAPYRUSJS
+    }
+
+    public partial class FormMain : Form
     {
         public delegate void UpdateHandler(string stdOut);
+        public delegate void ProcessExitedHandler(int exitCode);
         public UpdateHandler UHandler;
+        public ProcessExitedHandler ProcessExitHandler;
         public FormConfigure formConfigure;
         public static AppSettings Settings;
-        public static string AppVersion = String.Format("{0}.{1}.{2}", Assembly.GetExecutingAssembly().GetName().Version.Major, Assembly.GetExecutingAssembly().GetName().Version.Minor, Assembly.GetExecutingAssembly().GetName().Version.Build);
+        public static string AppVersion = String.Format("{0}.{1}.{2}", Assembly.GetExecutingAssembly().GetName().Version.Major, Assembly.GetExecutingAssembly().GetName().Version.Minor, Assembly.GetExecutingAssembly().GetName().Version.Revision);
+        private LogContent _logContent;
+        private ProcessingStatus _status = ProcessingStatus.IDLE;
+        public Process _renderProcess;
+        private uint _uiRefreshTickingRate = 500;
 
         public FormMain()
         {
             InitializeComponent();
-            this.Text = this.Text + " v" + AppVersion;
+
+            this.Text = String.Format("{0} v{1} build {2}", this.Text, AppVersion, Assembly.GetExecutingAssembly().GetName().Version.Build);
             comboBoxVersion.SelectedIndex = 0;
             textBoxWorld.Text = @":\Users\%username%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\";
-            Application.ApplicationExit += new EventHandler(CloseApplication);
+            // Application.ApplicationExit += CloseApplication;
+            this.FormClosing += CloseApplication;
 
             // Load settings
-            var configProfile = @".\configuration.json";
+            string configProfile = @".\configuration.json";
             if (File.Exists(configProfile))
             {
                 Settings = JsonConvert.DeserializeObject<AppSettings>(File.ReadAllText(configProfile));
@@ -38,15 +60,49 @@ namespace papyrus_gui
                 Settings = new AppSettings();
             }
 
-            formConfigure = new FormConfigure();
+            formConfigure = new FormConfigure(this);
+            _logContent = new LogContent(32);
+
+            System.Timers.Timer statusCheckTimer = new System.Timers.Timer(_uiRefreshTickingRate);
+            statusCheckTimer.AutoReset = true;
+            statusCheckTimer.Elapsed += (object sender, ElapsedEventArgs e) =>
+            {
+                buttonRender.Text = "Start rendering!";
+                switch (_status)
+                {
+                    case ProcessingStatus.IDLE:
+                        statusLabel.Text = "Waiting";
+                        break;
+
+                    case ProcessingStatus.RENDERING:
+                        statusLabel.Text = "Rendering";
+                        buttonRender.Text = "STOP RENDERING!";
+                        break;
+
+                    case ProcessingStatus.FINISHED:
+                        statusLabel.Text = "Finished";
+                        break;
+
+                    case ProcessingStatus.CANCELED:
+                        statusLabel.Text = "Canceled";
+                        break;
+                }
+            };
+            statusCheckTimer.Start();
         }
 
-        private void CloseApplication(object sender, EventArgs e)
+        private void CloseApplication(object sender, FormClosingEventArgs e)
         {
-            Settings.config["variant"] = comboBoxVersion.SelectedIndex;
-            using (StreamWriter streamWriter = new StreamWriter(@".\configuration.json", false))
+            if (_status == ProcessingStatus.RENDERING)
             {
-                streamWriter.Write(JsonConvert.SerializeObject(Settings));
+                e.Cancel = !PromptCancelConfirmation();
+            } else
+            {
+                Settings.config["variant"] = comboBoxVersion.SelectedIndex;
+                using (StreamWriter streamWriter = new StreamWriter(@".\configuration.json", false))
+                {
+                    streamWriter.Write(JsonConvert.SerializeObject(Settings));
+                }
             }
         }
 
@@ -76,71 +132,111 @@ namespace papyrus_gui
         }
         private void ButtonRender_Click(object sender, EventArgs e)
         {
-            Settings.config["world"] = textBoxWorld.Text;
-            Settings.config["output"] = textBoxOutput.Text;
-
-            if (Directory.Exists(textBoxWorld.Text.ToString()) && Directory.Exists(textBoxOutput.Text.ToString()))
+            switch (_status)
             {
-                switch (comboBoxVersion.SelectedIndex)
-                {
-                    // .cs
-                    case 0:
-                        UHandler = UpdateConsole;
+                case ProcessingStatus.RENDERING:
+                    PromptCancelConfirmation();
+                    break;
+                default:
+                    Settings.config["world"] = textBoxWorld.Text;
+                    Settings.config["output"] = textBoxOutput.Text;
 
-                        //var renderThread = new RenderThread(this, String.Format(@"-w {0} -o {1}", Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString())));
-                        String[] additionalArgs = new String[2];
-
-                        if (Settings.config_cs["profile"].ToLower() != "default")
+                    if (Directory.Exists(textBoxWorld.Text.ToString()) && Directory.Exists(textBoxOutput.Text.ToString()))
+                    {
+                        switch (comboBoxVersion.SelectedIndex)
                         {
-                            additionalArgs[0] = String.Format("--profile {0}", Settings.config_cs["profile"].ToLower());
+                            // .cs
+                            case 0:
+                                UHandler = UpdateConsole;
+                                ProcessExitHandler = ProcessExited;
+
+                                Thread renderThread = new Thread(new ThreadStart(() =>
+                                {
+                                    _renderProcess = new Process();
+                                    _renderProcess.StartInfo.FileName = FormMain.Settings.config_cs["executable"];
+                                    _renderProcess.StartInfo.Arguments = FormMain.Settings.GetArguments(PapyrusVariant.PAPYRUSCS, false, Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString()));
+                                    _renderProcess.StartInfo.UseShellExecute = false;
+                                    _renderProcess.StartInfo.RedirectStandardOutput = true;
+                                    _renderProcess.StartInfo.CreateNoWindow = true;
+                                    _renderProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                                    _renderProcess.Start();
+
+                                    _renderProcess.BeginOutputReadLine();
+
+                                    // _renderProcess.Exited += (object threadSender, EventArgs eArgs) => { this.ProcessExitHandler?.Invoke(_renderProcess.ExitCode); };
+                                    _renderProcess.OutputDataReceived += (object threadSender, DataReceivedEventArgs eArgs) => { this.UHandler?.Invoke(eArgs.Data); };
+
+                                    _renderProcess.WaitForExit();
+                                    ProcessExitHandler?.Invoke(_renderProcess.ExitCode);
+                                    _renderProcess.Close();
+                                }));
+                                renderThread.Start();
+                                _status = ProcessingStatus.RENDERING;
+                                break;
+
+                            // .js
+                            case 1:
+                                // Not available
+                                break;
                         }
-
-                        if (Settings.config_cs["limitXZ_enable"])
-                        {
-                            additionalArgs[1] = String.Format("--limitx {0},{1} --limitz {2},{3}", Settings.config_cs["limitXZ_X1"], Settings.config_cs["limitXZ_X2"], Settings.config_cs["limitXZ_Z1"], Settings.config_cs["limitXZ_Z2"]);
-                        }
-
-                        string arguments = String.Format("-w \"{0}\" -o \"{1}\" --dim {2} -f {3} {4} --brillouin_j {5} --brillouin_divider {6} --brillouin_offset {7} --forceoverwrite {8} --use_leaflet_legacy {9} --htmlfile {10} {11} {12}", Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString()), Settings.config_cs["dimension"], Settings.config_cs["image_format"].ToString().ToLower(), Settings.config_cs["image_quality"], Settings.config_cs["heightmap_j"], Settings.config_cs["heightmap_divider"], Settings.config_cs["heightmap_offset"], Settings.config_cs["force_overwrite"], Settings.config_cs["leaflet"], Settings.config_cs["html_filename"], additionalArgs[0], additionalArgs[1]);
-
-                        Thread renderThread = new Thread(new ThreadStart(() =>
-                        {
-                            Process process = new Process();
-                            process.StartInfo.FileName = FormMain.Settings.config_cs["executable"];
-                            process.StartInfo.Arguments = arguments;
-                            process.StartInfo.UseShellExecute = false;
-                            process.StartInfo.RedirectStandardOutput = true;
-                            process.StartInfo.CreateNoWindow = true;
-                            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                            process.Start();
-
-                            process.BeginOutputReadLine();
-
-                            process.OutputDataReceived += (object threadSender, DataReceivedEventArgs eArgs) => { this.UHandler?.Invoke(eArgs.Data); };
-                        }));
-                        renderThread.Start();
-
-                        // MessageBox.Show(FormMain.Settings.config_cs["executable"] + " " + arguments);
-
-                        break;
-
-                    // .js
-                    case 1:
-                        break;
-                }
-            } else
-            {
-                MessageBox.Show("World and/ or output directory is invalid or does not exist.", "Invalid directory", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("World and/ or output directory is invalid or does not exist.", "Invalid directory", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    break;
             }
         }
+
+        private bool PromptCancelConfirmation()
+        {
+            bool cancel = false;
+            if (MessageBox.Show("A rendering process is still running. Do you really want to cancel?", "Just to make sure...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                try
+                {
+                    _renderProcess.Kill();
+                    _logContent.Append("\nRendering process canceled by user.");
+                    _status = ProcessingStatus.CANCELED;
+
+                    cancel = true;
+                }
+                catch
+                {
+                    MessageBox.Show("Could not cancel rendering process.");
+                }
+            }
+
+            return cancel;
+        }
+
         public void UpdateConsole(string stdOut)
         {
-            richTextBoxConsoleOutput.Text += stdOut + "\n";
-            richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.Text.Length;
-            richTextBoxConsoleOutput.ScrollToCaret();
+
+            if (checkBoxEnableConsoleOutput.Checked)
+            {
+                _logContent.Append(stdOut);
+                richTextBoxConsoleOutput.Lines = _logContent.Lines;
+                richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.TextLength;
+                richTextBoxConsoleOutput.ScrollToCaret();
+            }
         }
+
+        public void ProcessExited(int exitCode)
+        {
+            if (exitCode == 0)
+            {
+                _status = ProcessingStatus.FINISHED;
+            }
+            else
+            {
+                _status = ProcessingStatus.CANCELED;
+            }
+        }
+
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            System.Environment.Exit(0);
         }
         private void DiscordToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -148,51 +244,25 @@ namespace papyrus_gui
         }
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(String.Format("papyrus.gui version {0} by clarkx86 & DeepBlue4200", AppVersion, "About", MessageBoxButtons.OK, MessageBoxIcon.Information));
+            MessageBox.Show(String.Format("papyrus.gui version {0} build {1} by clarkx86 & DeepBlue", AppVersion, Assembly.GetExecutingAssembly().GetName().Version.Build), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-    }
 
-    internal class RenderThread
-    {
-        public RenderThread(FormMain handle, string arguments)
+        private void checkBoxEnableConsoleOutput_CheckedChanged(object sender, EventArgs e)
         {
-            
+            richTextBoxConsoleOutput.Enabled = checkBoxEnableConsoleOutput.Checked;
 
-        }
-    }
+            switch (checkBoxEnableConsoleOutput.Checked)
+            {
+                case false:
+                    richTextBoxConsoleOutput.Enabled = false;
+                    richTextBoxConsoleOutput.Text = "Console output disabled";
+                    break;
 
-    public class AppSettings
-    {
-        public Dictionary<string, dynamic> config = new Dictionary<string, dynamic>();
-        public Dictionary<string, dynamic> config_cs = new Dictionary<string, dynamic>();
-
-        public AppSettings()
-        {
-            // Global config
-            this.config["variant"] = 0;
-            this.config["world"] = @"C:/Users/%username%/AppData/Local/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/games/com.mojang/minecraftWorlds/";
-            this.config["output"] = "";
-            
-            // papyrus.cs config
-            this.config_cs["executable"] = "";
-            this.config_cs["limitXZ_enable"] = false;
-            this.config_cs["limitXZ_X1"] = 0;
-            this.config_cs["limitXZ_X2"] = 0;
-            this.config_cs["limitXZ_Z1"] = 0;
-            this.config_cs["limitXZ_Z2"] = 0;
-            this.config_cs["limitY_enable"] = false;
-            this.config_cs["limitY"] = 64;
-            this.config_cs["heightmap_enable"] = true;
-            this.config_cs["heightmap_j"] = 10000;
-            this.config_cs["heightmap_divider"] = 20;
-            this.config_cs["heightmap_offset"] = 64;
-            this.config_cs["dimension"] = 0;
-            this.config_cs["profile"] = "Default";
-            this.config_cs["html_filename"] = "index.html";
-            this.config_cs["image_format"] = "PNG";
-            this.config_cs["image_quality"] = 100;
-            this.config_cs["force_overwrite"] = false;
-            this.config_cs["leaflet"] = false;
+                case true:
+                    richTextBoxConsoleOutput.Enabled = true;
+                    richTextBoxConsoleOutput.Lines = _logContent.Lines;
+                    break;
+            }
         }
     }
 }

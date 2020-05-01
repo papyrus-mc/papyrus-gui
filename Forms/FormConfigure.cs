@@ -14,11 +14,14 @@ namespace papyrus_gui
     public partial class FormConfigure : Form
     {
         public static string pathExeCS, pathExeJS;
+        private FormMain FormMain;
 
-        public FormConfigure()
+
+        public FormConfigure(FormMain formMain)
         {
             InitializeComponent();
 
+            FormMain = formMain;
             this.FormClosing += FormConfigure_FormClosing;
 
             // Default values
@@ -66,32 +69,7 @@ namespace papyrus_gui
             {
                 e.Cancel = true;
 
-                #region Save Settings
-                #region .cs
-                FormMain.Settings.config_cs["executable"] = pathExeCS;
-                FormMain.Settings.config_cs["limitXZ_enable"] = checkBoxLimitXZ.Checked;
-                FormMain.Settings.config_cs["limitXZ_X1"] = Convert.ToInt32(textBoxLimitXZX1.Text);
-                FormMain.Settings.config_cs["limitXZ_X2"] = Convert.ToInt32(textBoxLimitXZX2.Text);
-                FormMain.Settings.config_cs["limitXZ_Z1"] = Convert.ToInt32(textBoxLimitXZZ1.Text);
-                FormMain.Settings.config_cs["limitXZ_Z2"] = Convert.ToInt32(textBoxLimitXZZ2.Text);
-                FormMain.Settings.config_cs["limitY_enable"] = checkBoxLimitY.Checked;
-                FormMain.Settings.config_cs["limitY"] = Convert.ToInt32(textBoxLimitY.Text);
-                FormMain.Settings.config_cs["heightmap_enable"] = checkBoxHeightmap.Checked;
-                FormMain.Settings.config_cs["heightmap_j"] = Convert.ToInt32(textBoxHeightmapJ.Text);
-                FormMain.Settings.config_cs["heightmap_divider"] = Convert.ToInt32(textBoxHeightmapDivider.Text);
-                FormMain.Settings.config_cs["heightmap_offset"] = Convert.ToInt32(textBoxHeightmapOffset.Text);
-                FormMain.Settings.config_cs["dimension"] = comboBoxDimension.SelectedIndex;
-                FormMain.Settings.config_cs["profile"] = comboBoxProfile.SelectedItem.ToString();
-                FormMain.Settings.config_cs["html_filename"] = textBoxHTMLFilename.Text;
-                FormMain.Settings.config_cs["image_format"] = comboBoxImgFormat.SelectedItem.ToString();
-                FormMain.Settings.config_cs["image_quality"] = Convert.ToInt32(textBoxImgQuality.Text);
-                FormMain.Settings.config_cs["force_overwrite"] = checkBoxForceOverwrite.Checked;
-                FormMain.Settings.config_cs["leaflet"] = checkBoxLeaflet.Checked;
-                #endregion
-                //
-                #region .js
-                #endregion
-                #endregion
+                SaveSettings();
 
                 this.Hide();
             }
@@ -127,6 +105,62 @@ namespace papyrus_gui
             pathExeJS = BrowseExecutable(openFile, labelStatusExeJS);
 
             // FormMain.settings.config_js["executable"]
+        }
+
+        private void buttonCopyArgumentsCs_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you really want to copy the command line arguments to your clipboard?", "Just to make sure...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                SaveSettings();
+                Clipboard.SetText(FormMain.Settings.GetArguments(PapyrusVariant.PAPYRUSCS, true, Path.GetFullPath(this.FormMain.textBoxWorld.Text), Path.GetFullPath(this.FormMain.textBoxOutput.Text)));
+            }
+        }
+
+        public void SaveSettings()
+        {
+            #region Save Settings
+            #region .cs
+            FormMain.Settings.config_cs["executable"] = pathExeCS;
+            FormMain.Settings.config_cs["limitXZ_enable"] = checkBoxLimitXZ.Checked;
+            FormMain.Settings.config_cs["limitXZ_X1"] = Convert.ToInt32(textBoxLimitXZX1.Text);
+            FormMain.Settings.config_cs["limitXZ_X2"] = Convert.ToInt32(textBoxLimitXZX2.Text);
+            FormMain.Settings.config_cs["limitXZ_Z1"] = Convert.ToInt32(textBoxLimitXZZ1.Text);
+            FormMain.Settings.config_cs["limitXZ_Z2"] = Convert.ToInt32(textBoxLimitXZZ2.Text);
+            FormMain.Settings.config_cs["limitY_enable"] = checkBoxLimitY.Checked;
+            FormMain.Settings.config_cs["limitY"] = Convert.ToInt32(textBoxLimitY.Text);
+            FormMain.Settings.config_cs["heightmap_enable"] = checkBoxHeightmap.Checked;
+            FormMain.Settings.config_cs["heightmap_j"] = Convert.ToInt32(textBoxHeightmapJ.Text);
+            FormMain.Settings.config_cs["heightmap_divider"] = Convert.ToInt32(textBoxHeightmapDivider.Text);
+            FormMain.Settings.config_cs["heightmap_offset"] = Convert.ToInt32(textBoxHeightmapOffset.Text);
+            FormMain.Settings.config_cs["dimension"] = comboBoxDimension.SelectedIndex;
+            FormMain.Settings.config_cs["profile"] = comboBoxProfile.SelectedItem.ToString();
+            FormMain.Settings.config_cs["html_filename"] = textBoxHTMLFilename.Text;
+            FormMain.Settings.config_cs["image_format"] = comboBoxImgFormat.SelectedItem.ToString();
+            FormMain.Settings.config_cs["image_quality"] = Convert.ToInt32(textBoxImgQuality.Text);
+            FormMain.Settings.config_cs["force_overwrite"] = checkBoxForceOverwrite.Checked;
+            FormMain.Settings.config_cs["leaflet"] = checkBoxLeaflet.Checked;
+            #endregion
+            //
+            #region .js
+            #endregion
+            #endregion
+        }
+
+        public String GetArguments(PapyrusVariant variant)
+        {
+            string arguments = "";
+            switch (variant)
+            {
+                case PapyrusVariant.PAPYRUSCS:
+                    arguments = "";
+                    break;
+
+                case PapyrusVariant.PAPYRUSJS:
+                    // Not available
+                    break;
+            }
+
+            return arguments;
         }
     }
 }

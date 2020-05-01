@@ -39,6 +39,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonCopyArgumentsCs = new System.Windows.Forms.Button();
             this.checkBoxLeaflet = new System.Windows.Forms.CheckBox();
             this.textBoxHeightmapOffset = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -82,19 +83,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(4, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 17);
+            this.label1.Size = new System.Drawing.Size(117, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "papyrus.cs executable:";
+            this.label1.Text = "PapyrusCS executable:";
             // 
             // buttonBrowse1
             // 
-            this.buttonBrowse1.Location = new System.Drawing.Point(163, 23);
-            this.buttonBrowse1.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonBrowse1.Location = new System.Drawing.Point(122, 19);
             this.buttonBrowse1.Name = "buttonBrowse1";
-            this.buttonBrowse1.Size = new System.Drawing.Size(180, 24);
+            this.buttonBrowse1.Size = new System.Drawing.Size(135, 20);
             this.buttonBrowse1.TabIndex = 3;
             this.buttonBrowse1.Text = "Browse";
             this.buttonBrowse1.UseVisualStyleBackColor = true;
@@ -103,29 +102,26 @@
             // labelStatusExeCS
             // 
             this.labelStatusExeCS.AutoSize = true;
-            this.labelStatusExeCS.Location = new System.Drawing.Point(351, 27);
-            this.labelStatusExeCS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStatusExeCS.Location = new System.Drawing.Point(263, 22);
             this.labelStatusExeCS.Name = "labelStatusExeCS";
-            this.labelStatusExeCS.Size = new System.Drawing.Size(70, 17);
+            this.labelStatusExeCS.Size = new System.Drawing.Size(54, 13);
             this.labelStatusExeCS.TabIndex = 4;
             this.labelStatusExeCS.Text = "Not found";
             // 
             // labelStatusExeJS
             // 
             this.labelStatusExeJS.AutoSize = true;
-            this.labelStatusExeJS.Location = new System.Drawing.Point(351, 57);
-            this.labelStatusExeJS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStatusExeJS.Location = new System.Drawing.Point(263, 46);
             this.labelStatusExeJS.Name = "labelStatusExeJS";
-            this.labelStatusExeJS.Size = new System.Drawing.Size(70, 17);
+            this.labelStatusExeJS.Size = new System.Drawing.Size(54, 13);
             this.labelStatusExeJS.TabIndex = 9;
             this.labelStatusExeJS.Text = "Not found";
             // 
             // buttonBrowse2
             // 
-            this.buttonBrowse2.Location = new System.Drawing.Point(163, 53);
-            this.buttonBrowse2.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonBrowse2.Location = new System.Drawing.Point(122, 43);
             this.buttonBrowse2.Name = "buttonBrowse2";
-            this.buttonBrowse2.Size = new System.Drawing.Size(180, 24);
+            this.buttonBrowse2.Size = new System.Drawing.Size(135, 20);
             this.buttonBrowse2.TabIndex = 8;
             this.buttonBrowse2.Text = "Browse";
             this.buttonBrowse2.UseVisualStyleBackColor = true;
@@ -134,10 +130,9 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 57);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(4, 46);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 17);
+            this.label5.Size = new System.Drawing.Size(112, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "papyrus.js executable:";
             // 
@@ -151,11 +146,9 @@
             this.groupBox1.Controls.Add(this.buttonBrowse1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.labelStatusExeCS);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(10, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(426, 93);
+            this.groupBox1.Size = new System.Drawing.Size(320, 76);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "papyrus path configuration";
@@ -166,11 +159,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.tabControl1);
-            this.groupBox2.Location = new System.Drawing.Point(13, 114);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(10, 93);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(426, 392);
+            this.groupBox2.Size = new System.Drawing.Size(320, 346);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Additional arguments";
@@ -182,14 +173,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(7, 22);
+            this.tabControl1.Location = new System.Drawing.Point(5, 18);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(412, 363);
+            this.tabControl1.Size = new System.Drawing.Size(309, 323);
             this.tabControl1.TabIndex = 13;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonCopyArgumentsCs);
             this.tabPage1.Controls.Add(this.checkBoxLeaflet);
             this.tabPage1.Controls.Add(this.textBoxHeightmapOffset);
             this.tabPage1.Controls.Add(this.label14);
@@ -221,86 +214,97 @@
             this.tabPage1.Controls.Add(this.checkBoxLimitY);
             this.tabPage1.Controls.Add(this.labelLimitY);
             this.tabPage1.Controls.Add(this.textBoxLimitY);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(404, 334);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Size = new System.Drawing.Size(301, 297);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "papyrus.cs";
+            this.tabPage1.Text = "PapyrusCS";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonCopyArgumentsCs
+            // 
+            this.buttonCopyArgumentsCs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCopyArgumentsCs.Location = new System.Drawing.Point(5, 269);
+            this.buttonCopyArgumentsCs.Name = "buttonCopyArgumentsCs";
+            this.buttonCopyArgumentsCs.Size = new System.Drawing.Size(291, 23);
+            this.buttonCopyArgumentsCs.TabIndex = 32;
+            this.buttonCopyArgumentsCs.Text = "Copy command line arguments to clipboard";
+            this.buttonCopyArgumentsCs.UseVisualStyleBackColor = true;
+            this.buttonCopyArgumentsCs.Click += new System.EventHandler(this.buttonCopyArgumentsCs_Click);
             // 
             // checkBoxLeaflet
             // 
             this.checkBoxLeaflet.AutoSize = true;
-            this.checkBoxLeaflet.Location = new System.Drawing.Point(145, 303);
-            this.checkBoxLeaflet.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxLeaflet.Location = new System.Drawing.Point(109, 246);
             this.checkBoxLeaflet.Name = "checkBoxLeaflet";
-            this.checkBoxLeaflet.Size = new System.Drawing.Size(250, 21);
+            this.checkBoxLeaflet.Size = new System.Drawing.Size(189, 17);
             this.checkBoxLeaflet.TabIndex = 31;
             this.checkBoxLeaflet.Text = "Use Leaflet instead of OpenLayers";
             this.checkBoxLeaflet.UseVisualStyleBackColor = true;
             // 
             // textBoxHeightmapOffset
             // 
-            this.textBoxHeightmapOffset.Location = new System.Drawing.Point(302, 154);
-            this.textBoxHeightmapOffset.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxHeightmapOffset.Location = new System.Drawing.Point(226, 125);
             this.textBoxHeightmapOffset.Name = "textBoxHeightmapOffset";
-            this.textBoxHeightmapOffset.Size = new System.Drawing.Size(93, 22);
+            this.textBoxHeightmapOffset.Size = new System.Drawing.Size(71, 20);
             this.textBoxHeightmapOffset.TabIndex = 30;
             this.textBoxHeightmapOffset.Text = "64";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(160, 157);
+            this.label14.Location = new System.Drawing.Point(120, 128);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(50, 17);
+            this.label14.Size = new System.Drawing.Size(38, 13);
             this.label14.TabIndex = 29;
             this.label14.Text = "Offset:";
             // 
             // textBoxHeightmapDivider
             // 
-            this.textBoxHeightmapDivider.Location = new System.Drawing.Point(302, 124);
-            this.textBoxHeightmapDivider.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxHeightmapDivider.Location = new System.Drawing.Point(226, 101);
             this.textBoxHeightmapDivider.Name = "textBoxHeightmapDivider";
-            this.textBoxHeightmapDivider.Size = new System.Drawing.Size(93, 22);
+            this.textBoxHeightmapDivider.Size = new System.Drawing.Size(71, 20);
             this.textBoxHeightmapDivider.TabIndex = 28;
             this.textBoxHeightmapDivider.Text = "20";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(160, 127);
+            this.label13.Location = new System.Drawing.Point(120, 103);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 17);
+            this.label13.Size = new System.Drawing.Size(43, 13);
             this.label13.TabIndex = 27;
             this.label13.Text = "Divider:";
             // 
             // textBoxHeightmapJ
             // 
-            this.textBoxHeightmapJ.Location = new System.Drawing.Point(302, 94);
-            this.textBoxHeightmapJ.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxHeightmapJ.Location = new System.Drawing.Point(226, 76);
             this.textBoxHeightmapJ.Name = "textBoxHeightmapJ";
-            this.textBoxHeightmapJ.Size = new System.Drawing.Size(93, 22);
+            this.textBoxHeightmapJ.Size = new System.Drawing.Size(71, 20);
             this.textBoxHeightmapJ.TabIndex = 26;
             this.textBoxHeightmapJ.Text = "10000";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(160, 97);
+            this.label12.Location = new System.Drawing.Point(120, 79);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(70, 17);
+            this.label12.Size = new System.Drawing.Size(52, 13);
             this.label12.TabIndex = 25;
             this.label12.Text = "Brilloun J:";
             // 
             // checkBoxForceOverwrite
             // 
             this.checkBoxForceOverwrite.AutoSize = true;
-            this.checkBoxForceOverwrite.Location = new System.Drawing.Point(10, 303);
-            this.checkBoxForceOverwrite.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxForceOverwrite.Location = new System.Drawing.Point(8, 246);
             this.checkBoxForceOverwrite.Name = "checkBoxForceOverwrite";
-            this.checkBoxForceOverwrite.Size = new System.Drawing.Size(127, 21);
+            this.checkBoxForceOverwrite.Size = new System.Drawing.Size(99, 17);
             this.checkBoxForceOverwrite.TabIndex = 24;
             this.checkBoxForceOverwrite.Text = "Force overwrite";
             this.checkBoxForceOverwrite.UseVisualStyleBackColor = true;
@@ -314,35 +318,37 @@
             "Aquatic",
             "Ore",
             "Stronghold"});
-            this.comboBoxProfile.Location = new System.Drawing.Point(126, 213);
+            this.comboBoxProfile.Location = new System.Drawing.Point(94, 173);
+            this.comboBoxProfile.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxProfile.Name = "comboBoxProfile";
-            this.comboBoxProfile.Size = new System.Drawing.Size(269, 24);
+            this.comboBoxProfile.Size = new System.Drawing.Size(203, 21);
             this.comboBoxProfile.TabIndex = 23;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 216);
+            this.label11.Location = new System.Drawing.Point(5, 176);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 17);
+            this.label11.Size = new System.Drawing.Size(39, 13);
             this.label11.TabIndex = 22;
             this.label11.Text = "Profile:";
             // 
             // textBoxImgQuality
             // 
-            this.textBoxImgQuality.Location = new System.Drawing.Point(298, 243);
-            this.textBoxImgQuality.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxImgQuality.Location = new System.Drawing.Point(224, 197);
             this.textBoxImgQuality.Name = "textBoxImgQuality";
-            this.textBoxImgQuality.Size = new System.Drawing.Size(97, 22);
+            this.textBoxImgQuality.Size = new System.Drawing.Size(74, 20);
             this.textBoxImgQuality.TabIndex = 21;
             this.textBoxImgQuality.Text = "100";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(235, 246);
+            this.label10.Location = new System.Drawing.Point(176, 200);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(56, 17);
+            this.label10.Size = new System.Drawing.Size(42, 13);
             this.label10.TabIndex = 20;
             this.label10.Text = "Quality:";
             // 
@@ -353,17 +359,19 @@
             "PNG",
             "WebP",
             "JPG"});
-            this.comboBoxImgFormat.Location = new System.Drawing.Point(126, 243);
+            this.comboBoxImgFormat.Location = new System.Drawing.Point(94, 197);
+            this.comboBoxImgFormat.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxImgFormat.Name = "comboBoxImgFormat";
-            this.comboBoxImgFormat.Size = new System.Drawing.Size(103, 24);
+            this.comboBoxImgFormat.Size = new System.Drawing.Size(78, 21);
             this.comboBoxImgFormat.TabIndex = 19;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 246);
+            this.label9.Location = new System.Drawing.Point(5, 200);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(94, 17);
+            this.label9.Size = new System.Drawing.Size(71, 13);
             this.label9.TabIndex = 18;
             this.label9.Text = "Image format:";
             // 
@@ -374,133 +382,123 @@
             "Overworld",
             "Nether",
             "The End"});
-            this.comboBoxDimension.Location = new System.Drawing.Point(126, 183);
+            this.comboBoxDimension.Location = new System.Drawing.Point(94, 149);
+            this.comboBoxDimension.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxDimension.Name = "comboBoxDimension";
-            this.comboBoxDimension.Size = new System.Drawing.Size(269, 24);
+            this.comboBoxDimension.Size = new System.Drawing.Size(203, 21);
             this.comboBoxDimension.TabIndex = 17;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 186);
+            this.label8.Location = new System.Drawing.Point(5, 151);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(78, 17);
+            this.label8.Size = new System.Drawing.Size(59, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "Dimension:";
             // 
             // textBoxLimitXZX2
             // 
-            this.textBoxLimitXZX2.Location = new System.Drawing.Point(201, 35);
-            this.textBoxLimitXZX2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxLimitXZX2.Location = new System.Drawing.Point(151, 28);
             this.textBoxLimitXZX2.Name = "textBoxLimitXZX2";
-            this.textBoxLimitXZX2.Size = new System.Drawing.Size(52, 22);
+            this.textBoxLimitXZX2.Size = new System.Drawing.Size(40, 20);
             this.textBoxLimitXZX2.TabIndex = 11;
             this.textBoxLimitXZX2.Text = "0";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(160, 38);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(120, 31);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 17);
+            this.label6.Size = new System.Drawing.Size(26, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "X 2:";
             // 
             // textBoxLimitXZZ2
             // 
-            this.textBoxLimitXZZ2.Location = new System.Drawing.Point(343, 34);
-            this.textBoxLimitXZZ2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxLimitXZZ2.Location = new System.Drawing.Point(257, 28);
             this.textBoxLimitXZZ2.Name = "textBoxLimitXZZ2";
-            this.textBoxLimitXZZ2.Size = new System.Drawing.Size(52, 22);
+            this.textBoxLimitXZZ2.Size = new System.Drawing.Size(40, 20);
             this.textBoxLimitXZZ2.TabIndex = 13;
             this.textBoxLimitXZZ2.Text = "0";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(302, 37);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(226, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 17);
+            this.label7.Size = new System.Drawing.Size(26, 13);
             this.label7.TabIndex = 14;
             this.label7.Text = "Z 2:";
             // 
             // checkBoxLimitXZ
             // 
             this.checkBoxLimitXZ.AutoSize = true;
-            this.checkBoxLimitXZ.Location = new System.Drawing.Point(7, 7);
-            this.checkBoxLimitXZ.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxLimitXZ.Location = new System.Drawing.Point(5, 6);
             this.checkBoxLimitXZ.Name = "checkBoxLimitXZ";
-            this.checkBoxLimitXZ.Size = new System.Drawing.Size(113, 21);
+            this.checkBoxLimitXZ.Size = new System.Drawing.Size(88, 17);
             this.checkBoxLimitXZ.TabIndex = 0;
             this.checkBoxLimitXZ.Text = "Limit X and Z";
             this.checkBoxLimitXZ.UseVisualStyleBackColor = true;
             // 
             // textBoxLimitXZX1
             // 
-            this.textBoxLimitXZX1.Location = new System.Drawing.Point(201, 5);
-            this.textBoxLimitXZX1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxLimitXZX1.Location = new System.Drawing.Point(151, 4);
             this.textBoxLimitXZX1.Name = "textBoxLimitXZX1";
-            this.textBoxLimitXZX1.Size = new System.Drawing.Size(52, 22);
+            this.textBoxLimitXZX1.Size = new System.Drawing.Size(40, 20);
             this.textBoxLimitXZX1.TabIndex = 1;
             this.textBoxLimitXZX1.Text = "0";
             // 
             // labelLimitX
             // 
             this.labelLimitX.AutoSize = true;
-            this.labelLimitX.Location = new System.Drawing.Point(160, 8);
-            this.labelLimitX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLimitX.Location = new System.Drawing.Point(120, 6);
             this.labelLimitX.Name = "labelLimitX";
-            this.labelLimitX.Size = new System.Drawing.Size(33, 17);
+            this.labelLimitX.Size = new System.Drawing.Size(26, 13);
             this.labelLimitX.TabIndex = 2;
             this.labelLimitX.Text = "X 1:";
             // 
             // textBoxHTMLFilename
             // 
-            this.textBoxHTMLFilename.Location = new System.Drawing.Point(126, 273);
-            this.textBoxHTMLFilename.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxHTMLFilename.Location = new System.Drawing.Point(94, 222);
             this.textBoxHTMLFilename.Name = "textBoxHTMLFilename";
-            this.textBoxHTMLFilename.Size = new System.Drawing.Size(269, 22);
+            this.textBoxHTMLFilename.Size = new System.Drawing.Size(203, 20);
             this.textBoxHTMLFilename.TabIndex = 10;
             this.textBoxHTMLFilename.Text = "index.html";
             // 
             // textBoxLimitXZZ1
             // 
-            this.textBoxLimitXZZ1.Location = new System.Drawing.Point(343, 4);
-            this.textBoxLimitXZZ1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxLimitXZZ1.Location = new System.Drawing.Point(257, 3);
             this.textBoxLimitXZZ1.Name = "textBoxLimitXZZ1";
-            this.textBoxLimitXZZ1.Size = new System.Drawing.Size(52, 22);
+            this.textBoxLimitXZZ1.Size = new System.Drawing.Size(40, 20);
             this.textBoxLimitXZZ1.TabIndex = 3;
             this.textBoxLimitXZZ1.Text = "0";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 276);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(5, 224);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 17);
+            this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "HTML file name:";
             // 
             // labelLimitZ
             // 
             this.labelLimitZ.AutoSize = true;
-            this.labelLimitZ.Location = new System.Drawing.Point(302, 7);
-            this.labelLimitZ.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLimitZ.Location = new System.Drawing.Point(226, 6);
             this.labelLimitZ.Name = "labelLimitZ";
-            this.labelLimitZ.Size = new System.Drawing.Size(33, 17);
+            this.labelLimitZ.Size = new System.Drawing.Size(26, 13);
             this.labelLimitZ.TabIndex = 4;
             this.labelLimitZ.Text = "Z 1:";
             // 
             // checkBoxHeightmap
             // 
             this.checkBoxHeightmap.AutoSize = true;
-            this.checkBoxHeightmap.Location = new System.Drawing.Point(7, 96);
-            this.checkBoxHeightmap.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxHeightmap.Location = new System.Drawing.Point(5, 78);
             this.checkBoxHeightmap.Name = "checkBoxHeightmap";
-            this.checkBoxHeightmap.Size = new System.Drawing.Size(146, 21);
+            this.checkBoxHeightmap.Size = new System.Drawing.Size(113, 17);
             this.checkBoxHeightmap.TabIndex = 8;
             this.checkBoxHeightmap.Text = "Enable Heightmap";
             this.checkBoxHeightmap.UseVisualStyleBackColor = true;
@@ -508,10 +506,9 @@
             // checkBoxLimitY
             // 
             this.checkBoxLimitY.AutoSize = true;
-            this.checkBoxLimitY.Location = new System.Drawing.Point(7, 67);
-            this.checkBoxLimitY.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxLimitY.Location = new System.Drawing.Point(5, 54);
             this.checkBoxLimitY.Name = "checkBoxLimitY";
-            this.checkBoxLimitY.Size = new System.Drawing.Size(72, 21);
+            this.checkBoxLimitY.Size = new System.Drawing.Size(57, 17);
             this.checkBoxLimitY.TabIndex = 5;
             this.checkBoxLimitY.Text = "Limit Y";
             this.checkBoxLimitY.UseVisualStyleBackColor = true;
@@ -519,19 +516,17 @@
             // labelLimitY
             // 
             this.labelLimitY.AutoSize = true;
-            this.labelLimitY.Location = new System.Drawing.Point(160, 68);
-            this.labelLimitY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLimitY.Location = new System.Drawing.Point(120, 55);
             this.labelLimitY.Name = "labelLimitY";
-            this.labelLimitY.Size = new System.Drawing.Size(21, 17);
+            this.labelLimitY.Size = new System.Drawing.Size(17, 13);
             this.labelLimitY.TabIndex = 7;
             this.labelLimitY.Text = "Y:";
             // 
             // textBoxLimitY
             // 
-            this.textBoxLimitY.Location = new System.Drawing.Point(201, 65);
-            this.textBoxLimitY.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxLimitY.Location = new System.Drawing.Point(151, 53);
             this.textBoxLimitY.Name = "textBoxLimitY";
-            this.textBoxLimitY.Size = new System.Drawing.Size(52, 22);
+            this.textBoxLimitY.Size = new System.Drawing.Size(40, 20);
             this.textBoxLimitY.TabIndex = 6;
             this.textBoxLimitY.Text = "64";
             // 
@@ -539,10 +534,11 @@
             // 
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Enabled = false;
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(403, 341);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Size = new System.Drawing.Size(301, 297);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "papyrus.js";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -550,25 +546,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 7);
+            this.label2.Location = new System.Drawing.Point(5, 6);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 17);
+            this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Not available...";
             // 
             // FormConfigure
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 519);
+            this.ClientSize = new System.Drawing.Size(340, 456);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(470, 566);
+            this.MaximumSize = new System.Drawing.Size(356, 495);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(470, 566);
+            this.MinimumSize = new System.Drawing.Size(356, 495);
             this.Name = "FormConfigure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configure";
@@ -629,5 +625,6 @@
         private System.Windows.Forms.ComboBox comboBoxProfile;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkBoxLeaflet;
+        private System.Windows.Forms.Button buttonCopyArgumentsCs;
     }
 }
