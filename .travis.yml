@@ -12,7 +12,7 @@ env:
     - DOCKER_SRC_DIR=/usr/src/${REPO_NAME}
 before_install:
   - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
-  - docker run mono --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${DOCKER_SRC_DIR} -w ${DOCKER_SRC_DIR}
+  - docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${DOCKER_SRC_DIR} -w ${DOCKER_SRC_DIR} mono
   - docker exec mono_build nuget restore
 script:
   - docker exec mono_build msbuild papyrus-automation.csproj /p:Configuration=Release
