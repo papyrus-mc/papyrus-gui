@@ -15,7 +15,7 @@ before_install:
   - docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${DOCKER_SRC_DIR} -w ${DOCKER_SRC_DIR} mono
   - docker exec mono_build nuget restore
 script:
-  - docker exec mono_build msbuild papyrus-automation.csproj /p:Configuration=Release
+  - docker exec mono_build msbuild papyrus-gui.csproj /p:Configuration=Release
 before_deploy:
   - cd ~/build/${TRAVIS_REPO_SLUG}/bin/Release
   - zip ${ARTIFACT_NAME}.zip ./*
