@@ -1,0 +1,21 @@
+os: linux
+dist: xenial
+language: csharp
+mono: none
+services:
+  - docker
+env:
+  global: 
+    - REPO_NAME=$(echo $TRAVIS_BUILD_DIR | sed -r 's/^.+\///g')
+    - TAG_CLEAN="$(if [ -z $TRAVIS_TAG ]; then echo '1.0.0'; else echo $(echo $TRAVIS_TAG | sed -r 's/^v//g'); fi)"
+    - ASSEMBLY_VERSION=$(echo $TAG_CLEAN | sed -r "s/^.+\./&${TRAVIS_BUILD_NUMBER}./g")
+    - DOCKER_SRC_DIR=/usr/src/${REPO_NAME}
+before_install:
+  - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
+  - docker run mono --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${DOCKER_SRC_DIR} -w ${DOCKER_SRC_DIR}
+  - docker exec mono_build nuget restore
+script:
+  - docker exec mono_build msbuild papyrus-automation.csproj /p:Configuration=Release
+before_deploy:
+  - cd ~/build/${TRAVIS_REPO_SLUG}/bin/Release
+  - zip ${ARTIFACT_NAME}.zip ./*
