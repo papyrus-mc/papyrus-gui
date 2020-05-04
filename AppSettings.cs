@@ -11,6 +11,7 @@ namespace papyrus_gui
         public AppSettings()
         {
             // Global config
+            this.config["checkForUpdatesOnStartup"] = false;
             this.config["variant"] = 0;
             this.config["world"] = @"C:/Users/%username%/AppData/Local/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/games/com.mojang/minecraftWorlds/";
             this.config["output"] = "";

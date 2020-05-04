@@ -6,6 +6,8 @@ using System.Threading;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.Timers;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace papyrus_gui
 {
@@ -41,27 +43,43 @@ namespace papyrus_gui
         {
             InitializeComponent();
 
-            this.Text = String.Format("{0} v{1} build {2}", this.Text, AppVersion, Assembly.GetExecutingAssembly().GetName().Version.Build);
+            this.Text = String.Format("{0} v{1}", this.Text, AppVersion);
+            _logContent = new LogContent(32);
+
             comboBoxVersion.SelectedIndex = 0;
-            textBoxWorld.Text = @":\Users\%username%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\";
+            textBoxWorld.Text = @"C:\Users\%username%\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds";
             // Application.ApplicationExit += CloseApplication;
             this.FormClosing += CloseApplication;
+
+            System.Timers.Timer checkForUpdateTimer = new System.Timers.Timer(1000);
+            checkForUpdateTimer.AutoReset = false;
 
             // Load settings
             string configProfile = @".\configuration.json";
             if (File.Exists(configProfile))
             {
-                Settings = JsonConvert.DeserializeObject<AppSettings>(File.ReadAllText(configProfile));
+                using (StreamReader streamReader = new StreamReader(new FileStream(configProfile, FileMode.Open, FileAccess.Read)))
+                {
+                    Settings = JsonConvert.DeserializeObject<AppSettings>(streamReader.ReadToEnd());
+                }
+
                 comboBoxVersion.SelectedIndex = (int)Settings.config["variant"];
                 textBoxWorld.Text = Settings.config["world"];
                 textBoxOutput.Text = Settings.config["output"];
             } else
             {
                 Settings = new AppSettings();
+
+                checkForUpdateTimer.Elapsed += (object sender, ElapsedEventArgs e) => { Settings.config["checkForUpdatesOnStartup"] = (MessageBox.Show("Do you want to automatically check for updates when this application starts?", "Check for updates on startup?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes ? true : false); };
             }
 
-            formConfigure = new FormConfigure(this);
-            _logContent = new LogContent(32);
+
+            checkForUpdateTimer.Elapsed += (object sender, ElapsedEventArgs e) => {
+                if ((bool)Settings.config["checkForUpdatesOnStartup"])
+                {
+                    UpdateCheck(false);
+                }
+            };
 
             System.Timers.Timer statusCheckTimer = new System.Timers.Timer(_uiRefreshTickingRate);
             statusCheckTimer.AutoReset = true;
@@ -89,6 +107,63 @@ namespace papyrus_gui
                 }
             };
             statusCheckTimer.Start();
+            checkForUpdateTimer.Start();
+
+            formConfigure = new FormConfigure(this);
+        }
+
+        public void UpdateCheck(bool notifyLatest)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@"https://api.github.com/repos/clarkx86/papyrus-gui/releases/latest");
+            request.UserAgent = "papyrus-gui";
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                dynamic jsonResponse;
+                using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
+                {
+                    jsonResponse = JsonConvert.DeserializeObject(streamReader.ReadToEnd());
+                }
+
+                Match remoteTag = Regex.Match((string)jsonResponse["tag_name"], @"^v?(\d+).(\d+).(\d+)");
+                //MessageBox.Show((string)json["tag_name"] + "\nCaptures: " + remoteTag[0].Groups.Count);
+                // MessageBox.Show(Convert.ToString(remoteTag[0].Groups.Count));
+
+                if (remoteTag.Groups.Count > 3)
+                {
+                    Version assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                    Version localVersion = new Version(assemblyVersion.Major, assemblyVersion.Minor, 0, assemblyVersion.Revision);
+                    Version remoteVersion = new Version(Convert.ToInt32(remoteTag.Groups[1].Value), Convert.ToInt32(remoteTag.Groups[2].Value), 0, Convert.ToInt32(remoteTag.Groups[3].Value));
+                    // MessageBox.Show(remoteVersion.ToString());
+
+
+                    if (remoteVersion > localVersion)
+                    {
+                        if (MessageBox.Show(String.Format("A new update is available!\n\nLocal version: {0}\nRemote version: {1}\n\nDo you want to download the update? This will open a link in your browser.", FormatVersion(localVersion), FormatVersion(remoteVersion)), "Update available", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        {
+                            Process.Start(@"https://github.com/clarkx86/papyrus-gui/releases/latest");
+                        }
+                    } else if (notifyLatest)
+                    {
+                        MessageBox.Show("You already have the latest version!", "No new updates", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                } else
+                {
+                    MessageBox.Show("Could not check for updates: Invalid remote version.");
+                }
+            } else
+            {
+                MessageBox.Show(String.Format("Failed to check for updates.\nResponse code: {0}", ((HttpWebResponse)response).StatusCode));
+            }
+
+            response.Close();
+        }
+
+        private string FormatVersion(Version version)
+        {
+            return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Revision);
         }
 
         private void CloseApplication(object sender, FormClosingEventArgs e)
@@ -101,7 +176,7 @@ namespace papyrus_gui
                 Settings.config["variant"] = comboBoxVersion.SelectedIndex;
                 using (StreamWriter streamWriter = new StreamWriter(@".\configuration.json", false))
                 {
-                    streamWriter.Write(JsonConvert.SerializeObject(Settings));
+                    streamWriter.Write(JsonConvert.SerializeObject(Settings, Formatting.Indented));
                 }
             }
         }
@@ -170,6 +245,8 @@ namespace papyrus_gui
                                     ProcessExitHandler?.Invoke(_renderProcess.ExitCode);
                                     _renderProcess.Close();
                                 }));
+
+                                _logContent.Clear();
                                 renderThread.Start();
                                 _status = ProcessingStatus.RENDERING;
                                 break;
@@ -190,8 +267,8 @@ namespace papyrus_gui
 
         private bool PromptCancelConfirmation()
         {
-            bool cancel = false;
-            if (MessageBox.Show("A rendering process is still running. Do you really want to cancel?", "Just to make sure...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            bool result = false;
+            if (MessageBox.Show("A rendering process is still running. Do you really want to cancel?", "Are you sure about that?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 try
                 {
@@ -199,7 +276,7 @@ namespace papyrus_gui
                     _logContent.Append("\nRendering process canceled by user.");
                     _status = ProcessingStatus.CANCELED;
 
-                    cancel = true;
+                    result = true;
                 }
                 catch
                 {
@@ -207,7 +284,7 @@ namespace papyrus_gui
                 }
             }
 
-            return cancel;
+            return result;
         }
 
         public void UpdateConsole(string stdOut)
@@ -240,7 +317,7 @@ namespace papyrus_gui
         }
         private void DiscordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(@"https://discordapp.com/invite/J2sBaXa");
+            PromptOpenLink(@"https://discordapp.com/invite/J2sBaXa");
         }
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -263,6 +340,34 @@ namespace papyrus_gui
                     richTextBoxConsoleOutput.Lines = _logContent.Lines;
                     break;
             }
+        }
+
+        private void papyrusCSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PromptOpenLink(@"https://github.com/mjungnickel18/papyruscs/releases/latest");
+        }
+
+        private void papyrusjsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PromptOpenLink(@"https://github.com/clarkx86/papyrusjs/releases/latest");
+        }
+
+        public static bool PromptOpenLink(string url)
+        {
+            bool result = false;
+
+            if (MessageBox.Show(String.Format("This will open the following link in your browser:\n\n{0}\n\nDo you want to proceed?", url), "Are you sure about that?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Process.Start(url);
+                result = true;
+            }
+
+            return result;
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateCheck(true);
         }
     }
 }

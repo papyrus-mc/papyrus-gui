@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace papyrus_gui
 {
@@ -24,12 +19,16 @@ namespace papyrus_gui
             FormMain = formMain;
             this.FormClosing += FormConfigure_FormClosing;
 
-            // Default values
+            #region DEFAULT VALUES
             buttonBrowse2.Enabled = false;
             checkBoxHeightmap.Checked = true;
             comboBoxDimension.SelectedIndex = 0;
             comboBoxProfile.SelectedIndex = 0;
             comboBoxImgFormat.SelectedIndex = 0;
+
+            numericUpDownHeightmapJ.Maximum = Int32.MaxValue;
+            numericUpDownHeightmapJ.Value = 10000;
+            #endregion
 
             #region Load settings
             pathExeCS = FormMain.Settings.config_cs["executable"];
@@ -42,22 +41,22 @@ namespace papyrus_gui
                 labelStatusExeCS.ForeColor = Color.Red;
                 labelStatusExeCS.Text = "Invalid";
             }
-            checkBoxLimitXZ.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["limitXZ_enable"]);
-            textBoxLimitXZX1.Text = FormMain.Settings.config_cs["limitXZ_X1"].ToString();
-            textBoxLimitXZX2.Text = FormMain.Settings.config_cs["limitXZ_X2"].ToString();
-            textBoxLimitXZZ1.Text = FormMain.Settings.config_cs["limitXZ_Z1"].ToString();
-            textBoxLimitXZZ2.Text = FormMain.Settings.config_cs["limitXZ_Z2"].ToString();
+            checkBoxLimitXZ.Checked = (bool)FormMain.Settings.config_cs["limitXZ_enable"];
+            numericUpDownXzX1.Value = FormMain.Settings.config_cs["limitXZ_X1"];
+            numericUpDownXzX2.Value = FormMain.Settings.config_cs["limitXZ_X2"];
+            numericUpDownXzZ1.Value = FormMain.Settings.config_cs["limitXZ_Z1"];
+            numericUpDownXzZ2.Value = FormMain.Settings.config_cs["limitXZ_Z2"];
             checkBoxLimitY.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["limitY_enable"]);
-            textBoxLimitY.Text = FormMain.Settings.config_cs["limitY"].ToString();
+            numericUpDownLimitY.Value = FormMain.Settings.config_cs["limitY"];
             checkBoxHeightmap.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["heightmap_enable"]);
-            textBoxHeightmapJ.Text = FormMain.Settings.config_cs["heightmap_j"].ToString();
-            textBoxHeightmapDivider.Text = FormMain.Settings.config_cs["heightmap_divider"].ToString();
-            textBoxHeightmapOffset.Text = FormMain.Settings.config_cs["heightmap_offset"].ToString();
+            numericUpDownHeightmapJ.Value = FormMain.Settings.config_cs["heightmap_j"];
+            numericUpDownHeightmapDivider.Value = FormMain.Settings.config_cs["heightmap_divider"];
+            numericUpDownHeightmapOffset.Value = FormMain.Settings.config_cs["heightmap_offset"];
             comboBoxDimension.SelectedIndex = (int)FormMain.Settings.config_cs["dimension"];
             comboBoxProfile.SelectedItem = FormMain.Settings.config_cs["profile"];
-            textBoxHTMLFilename.Text = FormMain.Settings.config_cs["html_filename"];
+            textBoxHtmlFilename.Text = FormMain.Settings.config_cs["html_filename"];
             comboBoxImgFormat.SelectedItem = FormMain.Settings.config_cs["image_format"];
-            textBoxImgQuality.Text = FormMain.Settings.config_cs["image_quality"].ToString();
+            numericUpDownImgQuality.Value = FormMain.Settings.config_cs["image_quality"];
             checkBoxForceOverwrite.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["force_overwrite"]);
             checkBoxLeaflet.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["leaflet"]);
             #endregion
@@ -109,7 +108,7 @@ namespace papyrus_gui
 
         private void buttonCopyArgumentsCs_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Do you really want to copy the command line arguments to your clipboard?", "Just to make sure...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Do you really want to copy the command line arguments to your clipboard?", "Are you sure about that?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 SaveSettings();
                 Clipboard.SetText(FormMain.Settings.GetArguments(PapyrusVariant.PAPYRUSCS, true, Path.GetFullPath(this.FormMain.textBoxWorld.Text), Path.GetFullPath(this.FormMain.textBoxOutput.Text)));
@@ -122,21 +121,21 @@ namespace papyrus_gui
             #region .cs
             FormMain.Settings.config_cs["executable"] = pathExeCS;
             FormMain.Settings.config_cs["limitXZ_enable"] = checkBoxLimitXZ.Checked;
-            FormMain.Settings.config_cs["limitXZ_X1"] = Convert.ToInt32(textBoxLimitXZX1.Text);
-            FormMain.Settings.config_cs["limitXZ_X2"] = Convert.ToInt32(textBoxLimitXZX2.Text);
-            FormMain.Settings.config_cs["limitXZ_Z1"] = Convert.ToInt32(textBoxLimitXZZ1.Text);
-            FormMain.Settings.config_cs["limitXZ_Z2"] = Convert.ToInt32(textBoxLimitXZZ2.Text);
+            FormMain.Settings.config_cs["limitXZ_X1"] = numericUpDownXzX1.Value;
+            FormMain.Settings.config_cs["limitXZ_X2"] = numericUpDownXzX2.Value;
+            FormMain.Settings.config_cs["limitXZ_Z1"] = numericUpDownXzZ1.Value;
+            FormMain.Settings.config_cs["limitXZ_Z2"] = numericUpDownXzZ2.Value;
             FormMain.Settings.config_cs["limitY_enable"] = checkBoxLimitY.Checked;
-            FormMain.Settings.config_cs["limitY"] = Convert.ToInt32(textBoxLimitY.Text);
+            FormMain.Settings.config_cs["limitY"] = numericUpDownLimitY.Value;
             FormMain.Settings.config_cs["heightmap_enable"] = checkBoxHeightmap.Checked;
-            FormMain.Settings.config_cs["heightmap_j"] = Convert.ToInt32(textBoxHeightmapJ.Text);
-            FormMain.Settings.config_cs["heightmap_divider"] = Convert.ToInt32(textBoxHeightmapDivider.Text);
-            FormMain.Settings.config_cs["heightmap_offset"] = Convert.ToInt32(textBoxHeightmapOffset.Text);
+            FormMain.Settings.config_cs["heightmap_j"] = numericUpDownHeightmapJ.Value;
+            FormMain.Settings.config_cs["heightmap_divider"] = numericUpDownHeightmapDivider.Value;
+            FormMain.Settings.config_cs["heightmap_offset"] = numericUpDownHeightmapOffset.Value;
             FormMain.Settings.config_cs["dimension"] = comboBoxDimension.SelectedIndex;
             FormMain.Settings.config_cs["profile"] = comboBoxProfile.SelectedItem.ToString();
-            FormMain.Settings.config_cs["html_filename"] = textBoxHTMLFilename.Text;
+            FormMain.Settings.config_cs["html_filename"] = textBoxHtmlFilename.Text;
             FormMain.Settings.config_cs["image_format"] = comboBoxImgFormat.SelectedItem.ToString();
-            FormMain.Settings.config_cs["image_quality"] = Convert.ToInt32(textBoxImgQuality.Text);
+            FormMain.Settings.config_cs["image_quality"] = numericUpDownImgQuality.Value;
             FormMain.Settings.config_cs["force_overwrite"] = checkBoxForceOverwrite.Checked;
             FormMain.Settings.config_cs["leaflet"] = checkBoxLeaflet.Checked;
             #endregion

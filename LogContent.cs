@@ -29,5 +29,10 @@ namespace papyrus_gui
 
             _content.Add(text);
         }
+
+        public void Clear()
+        {
+            _content.Clear();
+        }
     }
 }

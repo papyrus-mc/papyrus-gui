@@ -41,49 +41,58 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.buttonCopyArgumentsCs = new System.Windows.Forms.Button();
             this.checkBoxLeaflet = new System.Windows.Forms.CheckBox();
-            this.textBoxHeightmapOffset = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBoxHeightmapDivider = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBoxHeightmapJ = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.checkBoxForceOverwrite = new System.Windows.Forms.CheckBox();
             this.comboBoxProfile = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBoxImgQuality = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxImgFormat = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBoxDimension = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBoxLimitXZX2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBoxLimitXZZ2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBoxLimitXZ = new System.Windows.Forms.CheckBox();
-            this.textBoxLimitXZX1 = new System.Windows.Forms.TextBox();
             this.labelLimitX = new System.Windows.Forms.Label();
-            this.textBoxHTMLFilename = new System.Windows.Forms.TextBox();
-            this.textBoxLimitXZZ1 = new System.Windows.Forms.TextBox();
+            this.textBoxHtmlFilename = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.labelLimitZ = new System.Windows.Forms.Label();
             this.checkBoxHeightmap = new System.Windows.Forms.CheckBox();
             this.checkBoxLimitY = new System.Windows.Forms.CheckBox();
             this.labelLimitY = new System.Windows.Forms.Label();
-            this.textBoxLimitY = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDownXzX1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownXzX2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownXzZ1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownXzZ2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownLimitY = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownImgQuality = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownHeightmapJ = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownHeightmapOffset = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownHeightmapDivider = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimitY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownImgQuality)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapJ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapDivider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 19);
+            this.label1.Location = new System.Drawing.Point(6, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 13);
             this.label1.TabIndex = 0;
@@ -102,7 +111,7 @@
             // labelStatusExeCS
             // 
             this.labelStatusExeCS.AutoSize = true;
-            this.labelStatusExeCS.Location = new System.Drawing.Point(263, 22);
+            this.labelStatusExeCS.Location = new System.Drawing.Point(260, 23);
             this.labelStatusExeCS.Name = "labelStatusExeCS";
             this.labelStatusExeCS.Size = new System.Drawing.Size(54, 13);
             this.labelStatusExeCS.TabIndex = 4;
@@ -111,7 +120,7 @@
             // labelStatusExeJS
             // 
             this.labelStatusExeJS.AutoSize = true;
-            this.labelStatusExeJS.Location = new System.Drawing.Point(263, 46);
+            this.labelStatusExeJS.Location = new System.Drawing.Point(260, 46);
             this.labelStatusExeJS.Name = "labelStatusExeJS";
             this.labelStatusExeJS.Size = new System.Drawing.Size(54, 13);
             this.labelStatusExeJS.TabIndex = 9;
@@ -130,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 46);
+            this.label5.Location = new System.Drawing.Point(6, 46);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(112, 13);
             this.label5.TabIndex = 6;
@@ -182,38 +191,38 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.numericUpDownHeightmapDivider);
+            this.tabPage1.Controls.Add(this.numericUpDownHeightmapOffset);
+            this.tabPage1.Controls.Add(this.numericUpDownHeightmapJ);
+            this.tabPage1.Controls.Add(this.numericUpDownImgQuality);
+            this.tabPage1.Controls.Add(this.numericUpDownLimitY);
+            this.tabPage1.Controls.Add(this.numericUpDownXzZ2);
+            this.tabPage1.Controls.Add(this.numericUpDownXzZ1);
+            this.tabPage1.Controls.Add(this.numericUpDownXzX2);
+            this.tabPage1.Controls.Add(this.numericUpDownXzX1);
             this.tabPage1.Controls.Add(this.buttonCopyArgumentsCs);
             this.tabPage1.Controls.Add(this.checkBoxLeaflet);
-            this.tabPage1.Controls.Add(this.textBoxHeightmapOffset);
             this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Controls.Add(this.textBoxHeightmapDivider);
             this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.textBoxHeightmapJ);
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.checkBoxForceOverwrite);
             this.tabPage1.Controls.Add(this.comboBoxProfile);
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.textBoxImgQuality);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.comboBoxImgFormat);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.comboBoxDimension);
             this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.textBoxLimitXZX2);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.textBoxLimitXZZ2);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.checkBoxLimitXZ);
-            this.tabPage1.Controls.Add(this.textBoxLimitXZX1);
             this.tabPage1.Controls.Add(this.labelLimitX);
-            this.tabPage1.Controls.Add(this.textBoxHTMLFilename);
-            this.tabPage1.Controls.Add(this.textBoxLimitXZZ1);
+            this.tabPage1.Controls.Add(this.textBoxHtmlFilename);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.labelLimitZ);
             this.tabPage1.Controls.Add(this.checkBoxHeightmap);
             this.tabPage1.Controls.Add(this.checkBoxLimitY);
             this.tabPage1.Controls.Add(this.labelLimitY);
-            this.tabPage1.Controls.Add(this.textBoxLimitY);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
@@ -238,20 +247,12 @@
             // checkBoxLeaflet
             // 
             this.checkBoxLeaflet.AutoSize = true;
-            this.checkBoxLeaflet.Location = new System.Drawing.Point(109, 246);
+            this.checkBoxLeaflet.Location = new System.Drawing.Point(107, 246);
             this.checkBoxLeaflet.Name = "checkBoxLeaflet";
             this.checkBoxLeaflet.Size = new System.Drawing.Size(189, 17);
             this.checkBoxLeaflet.TabIndex = 31;
             this.checkBoxLeaflet.Text = "Use Leaflet instead of OpenLayers";
             this.checkBoxLeaflet.UseVisualStyleBackColor = true;
-            // 
-            // textBoxHeightmapOffset
-            // 
-            this.textBoxHeightmapOffset.Location = new System.Drawing.Point(226, 125);
-            this.textBoxHeightmapOffset.Name = "textBoxHeightmapOffset";
-            this.textBoxHeightmapOffset.Size = new System.Drawing.Size(71, 20);
-            this.textBoxHeightmapOffset.TabIndex = 30;
-            this.textBoxHeightmapOffset.Text = "64";
             // 
             // label14
             // 
@@ -263,14 +264,6 @@
             this.label14.TabIndex = 29;
             this.label14.Text = "Offset:";
             // 
-            // textBoxHeightmapDivider
-            // 
-            this.textBoxHeightmapDivider.Location = new System.Drawing.Point(226, 101);
-            this.textBoxHeightmapDivider.Name = "textBoxHeightmapDivider";
-            this.textBoxHeightmapDivider.Size = new System.Drawing.Size(71, 20);
-            this.textBoxHeightmapDivider.TabIndex = 28;
-            this.textBoxHeightmapDivider.Text = "20";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -280,14 +273,6 @@
             this.label13.Size = new System.Drawing.Size(43, 13);
             this.label13.TabIndex = 27;
             this.label13.Text = "Divider:";
-            // 
-            // textBoxHeightmapJ
-            // 
-            this.textBoxHeightmapJ.Location = new System.Drawing.Point(226, 76);
-            this.textBoxHeightmapJ.Name = "textBoxHeightmapJ";
-            this.textBoxHeightmapJ.Size = new System.Drawing.Size(71, 20);
-            this.textBoxHeightmapJ.TabIndex = 26;
-            this.textBoxHeightmapJ.Text = "10000";
             // 
             // label12
             // 
@@ -311,6 +296,7 @@
             // 
             // comboBoxProfile
             // 
+            this.comboBoxProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxProfile.FormattingEnabled = true;
             this.comboBoxProfile.Items.AddRange(new object[] {
             "Default",
@@ -321,7 +307,7 @@
             this.comboBoxProfile.Location = new System.Drawing.Point(94, 173);
             this.comboBoxProfile.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxProfile.Name = "comboBoxProfile";
-            this.comboBoxProfile.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxProfile.Size = new System.Drawing.Size(202, 21);
             this.comboBoxProfile.TabIndex = 23;
             // 
             // label11
@@ -333,14 +319,6 @@
             this.label11.Size = new System.Drawing.Size(39, 13);
             this.label11.TabIndex = 22;
             this.label11.Text = "Profile:";
-            // 
-            // textBoxImgQuality
-            // 
-            this.textBoxImgQuality.Location = new System.Drawing.Point(224, 197);
-            this.textBoxImgQuality.Name = "textBoxImgQuality";
-            this.textBoxImgQuality.Size = new System.Drawing.Size(74, 20);
-            this.textBoxImgQuality.TabIndex = 21;
-            this.textBoxImgQuality.Text = "100";
             // 
             // label10
             // 
@@ -354,6 +332,7 @@
             // 
             // comboBoxImgFormat
             // 
+            this.comboBoxImgFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxImgFormat.FormattingEnabled = true;
             this.comboBoxImgFormat.Items.AddRange(new object[] {
             "PNG",
@@ -377,6 +356,7 @@
             // 
             // comboBoxDimension
             // 
+            this.comboBoxDimension.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDimension.FormattingEnabled = true;
             this.comboBoxDimension.Items.AddRange(new object[] {
             "Overworld",
@@ -385,7 +365,7 @@
             this.comboBoxDimension.Location = new System.Drawing.Point(94, 149);
             this.comboBoxDimension.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxDimension.Name = "comboBoxDimension";
-            this.comboBoxDimension.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxDimension.Size = new System.Drawing.Size(202, 21);
             this.comboBoxDimension.TabIndex = 17;
             // 
             // label8
@@ -398,14 +378,6 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Dimension:";
             // 
-            // textBoxLimitXZX2
-            // 
-            this.textBoxLimitXZX2.Location = new System.Drawing.Point(151, 28);
-            this.textBoxLimitXZX2.Name = "textBoxLimitXZX2";
-            this.textBoxLimitXZX2.Size = new System.Drawing.Size(40, 20);
-            this.textBoxLimitXZX2.TabIndex = 11;
-            this.textBoxLimitXZX2.Text = "0";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -414,14 +386,6 @@
             this.label6.Size = new System.Drawing.Size(26, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "X 2:";
-            // 
-            // textBoxLimitXZZ2
-            // 
-            this.textBoxLimitXZZ2.Location = new System.Drawing.Point(257, 28);
-            this.textBoxLimitXZZ2.Name = "textBoxLimitXZZ2";
-            this.textBoxLimitXZZ2.Size = new System.Drawing.Size(40, 20);
-            this.textBoxLimitXZZ2.TabIndex = 13;
-            this.textBoxLimitXZZ2.Text = "0";
             // 
             // label7
             // 
@@ -442,14 +406,6 @@
             this.checkBoxLimitXZ.Text = "Limit X and Z";
             this.checkBoxLimitXZ.UseVisualStyleBackColor = true;
             // 
-            // textBoxLimitXZX1
-            // 
-            this.textBoxLimitXZX1.Location = new System.Drawing.Point(151, 4);
-            this.textBoxLimitXZX1.Name = "textBoxLimitXZX1";
-            this.textBoxLimitXZX1.Size = new System.Drawing.Size(40, 20);
-            this.textBoxLimitXZX1.TabIndex = 1;
-            this.textBoxLimitXZX1.Text = "0";
-            // 
             // labelLimitX
             // 
             this.labelLimitX.AutoSize = true;
@@ -459,21 +415,13 @@
             this.labelLimitX.TabIndex = 2;
             this.labelLimitX.Text = "X 1:";
             // 
-            // textBoxHTMLFilename
+            // textBoxHtmlFilename
             // 
-            this.textBoxHTMLFilename.Location = new System.Drawing.Point(94, 222);
-            this.textBoxHTMLFilename.Name = "textBoxHTMLFilename";
-            this.textBoxHTMLFilename.Size = new System.Drawing.Size(203, 20);
-            this.textBoxHTMLFilename.TabIndex = 10;
-            this.textBoxHTMLFilename.Text = "index.html";
-            // 
-            // textBoxLimitXZZ1
-            // 
-            this.textBoxLimitXZZ1.Location = new System.Drawing.Point(257, 3);
-            this.textBoxLimitXZZ1.Name = "textBoxLimitXZZ1";
-            this.textBoxLimitXZZ1.Size = new System.Drawing.Size(40, 20);
-            this.textBoxLimitXZZ1.TabIndex = 3;
-            this.textBoxLimitXZZ1.Text = "0";
+            this.textBoxHtmlFilename.Location = new System.Drawing.Point(94, 222);
+            this.textBoxHtmlFilename.Name = "textBoxHtmlFilename";
+            this.textBoxHtmlFilename.Size = new System.Drawing.Size(202, 20);
+            this.textBoxHtmlFilename.TabIndex = 10;
+            this.textBoxHtmlFilename.Text = "index.html";
             // 
             // label3
             // 
@@ -522,14 +470,6 @@
             this.labelLimitY.TabIndex = 7;
             this.labelLimitY.Text = "Y:";
             // 
-            // textBoxLimitY
-            // 
-            this.textBoxLimitY.Location = new System.Drawing.Point(151, 53);
-            this.textBoxLimitY.Name = "textBoxLimitY";
-            this.textBoxLimitY.Size = new System.Drawing.Size(40, 20);
-            this.textBoxLimitY.TabIndex = 6;
-            this.textBoxLimitY.Text = "64";
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label2);
@@ -552,6 +492,104 @@
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Not available...";
+            // 
+            // numericUpDownXzX1
+            // 
+            this.numericUpDownXzX1.Location = new System.Drawing.Point(151, 5);
+            this.numericUpDownXzX1.Name = "numericUpDownXzX1";
+            this.numericUpDownXzX1.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzX1.TabIndex = 33;
+            // 
+            // numericUpDownXzX2
+            // 
+            this.numericUpDownXzX2.Location = new System.Drawing.Point(151, 29);
+            this.numericUpDownXzX2.Name = "numericUpDownXzX2";
+            this.numericUpDownXzX2.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzX2.TabIndex = 34;
+            // 
+            // numericUpDownXzZ1
+            // 
+            this.numericUpDownXzZ1.Location = new System.Drawing.Point(257, 5);
+            this.numericUpDownXzZ1.Name = "numericUpDownXzZ1";
+            this.numericUpDownXzZ1.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzZ1.TabIndex = 35;
+            // 
+            // numericUpDownXzZ2
+            // 
+            this.numericUpDownXzZ2.Location = new System.Drawing.Point(257, 29);
+            this.numericUpDownXzZ2.Name = "numericUpDownXzZ2";
+            this.numericUpDownXzZ2.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzZ2.TabIndex = 36;
+            // 
+            // numericUpDownLimitY
+            // 
+            this.numericUpDownLimitY.Location = new System.Drawing.Point(151, 53);
+            this.numericUpDownLimitY.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.numericUpDownLimitY.Name = "numericUpDownLimitY";
+            this.numericUpDownLimitY.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownLimitY.TabIndex = 37;
+            this.numericUpDownLimitY.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownImgQuality
+            // 
+            this.numericUpDownImgQuality.Location = new System.Drawing.Point(226, 198);
+            this.numericUpDownImgQuality.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownImgQuality.Name = "numericUpDownImgQuality";
+            this.numericUpDownImgQuality.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownImgQuality.TabIndex = 38;
+            this.numericUpDownImgQuality.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownHeightmapJ
+            // 
+            this.numericUpDownHeightmapJ.Location = new System.Drawing.Point(226, 77);
+            this.numericUpDownHeightmapJ.Name = "numericUpDownHeightmapJ";
+            this.numericUpDownHeightmapJ.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownHeightmapJ.TabIndex = 39;
+            // 
+            // numericUpDownHeightmapOffset
+            // 
+            this.numericUpDownHeightmapOffset.Location = new System.Drawing.Point(226, 126);
+            this.numericUpDownHeightmapOffset.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.numericUpDownHeightmapOffset.Name = "numericUpDownHeightmapOffset";
+            this.numericUpDownHeightmapOffset.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownHeightmapOffset.TabIndex = 40;
+            this.numericUpDownHeightmapOffset.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownHeightmapDivider
+            // 
+            this.numericUpDownHeightmapDivider.Location = new System.Drawing.Point(226, 101);
+            this.numericUpDownHeightmapDivider.Name = "numericUpDownHeightmapDivider";
+            this.numericUpDownHeightmapDivider.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownHeightmapDivider.TabIndex = 41;
+            this.numericUpDownHeightmapDivider.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // FormConfigure
             // 
@@ -576,6 +614,15 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimitY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownImgQuality)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapJ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapDivider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -592,39 +639,39 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkBoxHeightmap;
         private System.Windows.Forms.Label labelLimitY;
-        private System.Windows.Forms.TextBox textBoxLimitY;
         private System.Windows.Forms.CheckBox checkBoxLimitY;
         private System.Windows.Forms.Label labelLimitZ;
-        private System.Windows.Forms.TextBox textBoxLimitXZZ1;
         private System.Windows.Forms.Label labelLimitX;
-        private System.Windows.Forms.TextBox textBoxLimitXZX1;
         private System.Windows.Forms.CheckBox checkBoxLimitXZ;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxHTMLFilename;
+        private System.Windows.Forms.TextBox textBoxHtmlFilename;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxLimitXZX2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxLimitXZZ2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxDimension;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBoxImgQuality;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBoxImgFormat;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBoxHeightmapOffset;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBoxHeightmapDivider;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBoxHeightmapJ;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox checkBoxForceOverwrite;
         private System.Windows.Forms.ComboBox comboBoxProfile;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkBoxLeaflet;
         private System.Windows.Forms.Button buttonCopyArgumentsCs;
+        private System.Windows.Forms.NumericUpDown numericUpDownImgQuality;
+        private System.Windows.Forms.NumericUpDown numericUpDownLimitY;
+        private System.Windows.Forms.NumericUpDown numericUpDownXzZ2;
+        private System.Windows.Forms.NumericUpDown numericUpDownXzZ1;
+        private System.Windows.Forms.NumericUpDown numericUpDownXzX2;
+        private System.Windows.Forms.NumericUpDown numericUpDownXzX1;
+        private System.Windows.Forms.NumericUpDown numericUpDownHeightmapDivider;
+        private System.Windows.Forms.NumericUpDown numericUpDownHeightmapOffset;
+        private System.Windows.Forms.NumericUpDown numericUpDownHeightmapJ;
     }
 }
