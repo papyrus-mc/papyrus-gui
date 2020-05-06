@@ -8,13 +8,13 @@ env:
   global: 
     - REPO_NAME=$(echo $TRAVIS_BUILD_DIR | sed -r 's/^.+\///g')
     - TAG_CLEAN="$(if [ -z $TRAVIS_TAG ]; then echo '1.0.0'; else echo $(echo $TRAVIS_TAG | sed -r 's/^v//g'); fi)"
-    - ASSEMBLY_VERSION=$(echo $TAG_CLEAN | sed -r "s/^.+\./&${TRAVIS_BUILD_NUMBER}./g")
+    - ASSEMBLY_VERSION=$(echo $TAG_CLEAN | sed -r 's/^.+\./&'$TRAVIS_BUILD_NUMBER'./g')
     - SRC_MOUNT=/usr/src/${REPO_NAME}
   jobs:
     - RUNTIME=win-x64
 before_install:
   - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
-  - sed -r -i 's/[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+/${ASSEMBLY_VERSION}/' Properties/AssemblyInfo.cs
+  - sed -r -i 's/[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+/'$ASSEMBLY_VERSION'/' Properties/AssemblyInfo.cs
   - docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${SRC_MOUNT} -w ${SRC_MOUNT} mono
   - docker exec mono_build nuget restore
 script:
