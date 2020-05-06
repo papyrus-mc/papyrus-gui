@@ -48,7 +48,7 @@ namespace papyrus_gui
                 case PapyrusVariant.PAPYRUSCS:
                     if (includeExePath)
                     {
-                        exePath = String.Format("\"{0}\" ", this.config_cs["executable"]);
+                        exePath = String.Format("\"{0}\" ", System.IO.Path.GetFullPath(this.config_cs["executable"]));
                     }
 
                     String[] additionalArgs = new String[2];

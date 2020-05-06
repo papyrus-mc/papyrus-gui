@@ -235,6 +235,11 @@
             // numericUpDownHeightmapDivider
             // 
             this.numericUpDownHeightmapDivider.Location = new System.Drawing.Point(226, 101);
+            this.numericUpDownHeightmapDivider.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownHeightmapDivider.Name = "numericUpDownHeightmapDivider";
             this.numericUpDownHeightmapDivider.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownHeightmapDivider.TabIndex = 41;

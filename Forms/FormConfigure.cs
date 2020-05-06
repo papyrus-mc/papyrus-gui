@@ -36,6 +36,7 @@ namespace papyrus_gui
             numericUpDownXzZ2.Maximum = Int32.MaxValue;
             numericUpDownHeightmapJ.Maximum = Int32.MaxValue;
             numericUpDownHeightmapJ.Value = 10000;
+            numericUpDownHeightmapDivider.Maximum = Int32.MaxValue;
             #endregion
 
             #region Load settings
@@ -76,19 +77,19 @@ namespace papyrus_gui
             {
                 e.Cancel = true;
 
-                SaveSettings();
+                ApplySettings();
 
                 this.Hide();
             }
         }
 
-        private string BrowseExecutable(OpenFileDialog OFD, Label label)
+        private string BrowseExecutable(OpenFileDialog openFileDialog, Label label)
         {
-            if (OFD.ShowDialog() == DialogResult.OK && File.Exists(OFD.FileName))
+            if (openFileDialog.ShowDialog() == DialogResult.OK && File.Exists(openFileDialog.FileName))
             {
                 label.ForeColor = Color.Green;
                 label.Text = "OK!";
-                return OFD.FileName.ToString();
+                return openFileDialog.FileName.ToString();
             }
             else
             {
@@ -118,12 +119,19 @@ namespace papyrus_gui
         {
             if (MessageBox.Show("Do you really want to copy the command line arguments to your clipboard?", "Are you sure about that?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                SaveSettings();
-                Clipboard.SetText(FormMain.Settings.GetArguments(PapyrusVariant.PAPYRUSCS, true, Path.GetFullPath(this.FormMain.textBoxWorld.Text), Path.GetFullPath(this.FormMain.textBoxOutput.Text)));
+                ApplySettings();
+
+                if (!String.IsNullOrEmpty(pathExeCS) && !String.IsNullOrWhiteSpace(this.FormMain.textBoxWorld.Text) && !String.IsNullOrWhiteSpace(this.FormMain.textBoxOutput.Text))
+                {
+                    Clipboard.SetText(FormMain.Settings.GetArguments(PapyrusVariant.PAPYRUSCS, true, Path.GetFullPath(this.FormMain.textBoxWorld.Text), Path.GetFullPath(this.FormMain.textBoxOutput.Text)));
+                } else
+                {
+                    MessageBox.Show("Could not copy arguments because executable-, world- and output-paths must be set.", "Could not copy arguments", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
-        public void SaveSettings()
+        public void ApplySettings()
         {
             #region Save Settings
             #region .cs

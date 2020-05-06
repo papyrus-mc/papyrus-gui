@@ -180,11 +180,6 @@ namespace papyrus_gui
             response.Close();
         }
 
-        private string FormatVersion(Version version)
-        {
-            return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Revision);
-        }
-
         private void CloseApplication(object sender, FormClosingEventArgs e)
         {
             if (_status == ProcessingStatus.RENDERING)
@@ -193,6 +188,9 @@ namespace papyrus_gui
             } else
             {
                 Settings.config["variant"] = comboBoxVersion.SelectedIndex;
+                Settings.config["world"] = textBoxWorld.Text;
+                Settings.config["output"] = textBoxOutput.Text;
+
                 using (StreamWriter streamWriter = new StreamWriter(@".\configuration.json", false))
                 {
                     streamWriter.Write(JsonConvert.SerializeObject(Settings, Formatting.Indented));
@@ -210,6 +208,7 @@ namespace papyrus_gui
                 //settings.config["world"] = textBoxWorld.Text;
             }
         }
+
         private void ButtonSelect2_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserOutput = new FolderBrowserDialog();
@@ -220,6 +219,19 @@ namespace papyrus_gui
                 //settings.config["output"] = textBoxOutput.Text;
             }
         }
+
+        public void UpdateConsole(string stdOut)
+        {
+
+            if (checkBoxEnableConsoleOutput.Checked)
+            {
+                _logContent.Append(stdOut);
+                richTextBoxConsoleOutput.Lines = _logContent.Lines;
+                richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.TextLength;
+                richTextBoxConsoleOutput.ScrollToCaret();
+            }
+        }
+
         private void ButtonRender_Click(object sender, EventArgs e)
         {
             switch (_status)
@@ -228,11 +240,11 @@ namespace papyrus_gui
                     PromptCancelConfirmation();
                     break;
                 default:
-                    Settings.config["world"] = textBoxWorld.Text;
-                    Settings.config["output"] = textBoxOutput.Text;
-
                     if (Directory.Exists(textBoxWorld.Text.ToString()) && Directory.Exists(textBoxOutput.Text.ToString()))
                     {
+                        formConfigure.ApplySettings();
+                        formConfigure.Hide();
+
                         switch (comboBoxVersion.SelectedIndex)
                         {
                             // .cs
@@ -261,10 +273,7 @@ namespace papyrus_gui
                                     _renderProcess.Close();
                                 }));
 
-                                formConfigure.Close();
-                                _logContent.Clear();
                                 renderThread.Start();
-                                _status = ProcessingStatus.RENDERING;
                                 break;
 
                             // .js
@@ -272,6 +281,9 @@ namespace papyrus_gui
                                 // Not available
                                 break;
                         }
+
+                        _logContent.Clear();
+                        _status = ProcessingStatus.RENDERING;
                     }
                     else
                     {
@@ -289,7 +301,7 @@ namespace papyrus_gui
                 try
                 {
                     _renderProcess.Kill();
-                    _logContent.Append("\nRendering process canceled by user.");
+                    _logContent.Append("\nRendering process was canceled by user.");
                     _status = ProcessingStatus.CANCELED;
 
                     result = true;
@@ -303,16 +315,17 @@ namespace papyrus_gui
             return result;
         }
 
-        public void UpdateConsole(string stdOut)
+        public static bool PromptOpenLink(string url)
         {
+            bool result = false;
 
-            if (checkBoxEnableConsoleOutput.Checked)
+            if (MessageBox.Show(String.Format("This will open the following link in your browser:\n\n{0}\n\nDo you want to proceed?", url), "Are you sure about that?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                _logContent.Append(stdOut);
-                richTextBoxConsoleOutput.Lines = _logContent.Lines;
-                richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.TextLength;
-                richTextBoxConsoleOutput.ScrollToCaret();
+                Process.Start(url);
+                result = true;
             }
+
+            return result;
         }
 
         public void ProcessExited(int exitCode)
@@ -370,19 +383,6 @@ namespace papyrus_gui
             PromptOpenLink(@"https://github.com/clarkx86/papyrusjs/releases/latest");
         }
 
-        public static bool PromptOpenLink(string url)
-        {
-            bool result = false;
-
-            if (MessageBox.Show(String.Format("This will open the following link in your browser:\n\n{0}\n\nDo you want to proceed?", url), "Are you sure about that?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Process.Start(url);
-                result = true;
-            }
-
-            return result;
-        }
-
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateCheck(true);
@@ -391,6 +391,11 @@ namespace papyrus_gui
         private void buttonConfigure_Click(object sender, EventArgs e)
         {
             formConfigure.Show();
+        }
+
+        private string FormatVersion(Version version)
+        {
+            return String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Revision);
         }
     }
 }
