@@ -26,6 +26,14 @@ namespace papyrus_gui
             comboBoxProfile.SelectedIndex = 0;
             comboBoxImgFormat.SelectedIndex = 0;
 
+            numericUpDownXzX1.Minimum = Int32.MinValue; // X1
+            numericUpDownXzX1.Maximum = Int32.MaxValue;
+            numericUpDownXzX2.Minimum = Int32.MinValue; // X2
+            numericUpDownXzX2.Maximum = Int32.MaxValue;
+            numericUpDownXzZ1.Minimum = Int32.MinValue; // Z1
+            numericUpDownXzZ1.Maximum = Int32.MaxValue;
+            numericUpDownXzZ2.Minimum = Int32.MinValue; // Z2
+            numericUpDownXzZ2.Maximum = Int32.MaxValue;
             numericUpDownHeightmapJ.Maximum = Int32.MaxValue;
             numericUpDownHeightmapJ.Value = 10000;
             #endregion
@@ -42,23 +50,23 @@ namespace papyrus_gui
                 labelStatusExeCS.Text = "Invalid";
             }
             checkBoxLimitXZ.Checked = (bool)FormMain.Settings.config_cs["limitXZ_enable"];
-            numericUpDownXzX1.Value = FormMain.Settings.config_cs["limitXZ_X1"];
-            numericUpDownXzX2.Value = FormMain.Settings.config_cs["limitXZ_X2"];
-            numericUpDownXzZ1.Value = FormMain.Settings.config_cs["limitXZ_Z1"];
-            numericUpDownXzZ2.Value = FormMain.Settings.config_cs["limitXZ_Z2"];
+            numericUpDownXzX1.Value = (int)FormMain.Settings.config_cs["limitXZ_X1"];
+            numericUpDownXzX2.Value = (int)FormMain.Settings.config_cs["limitXZ_X2"];
+            numericUpDownXzZ1.Value = (int)FormMain.Settings.config_cs["limitXZ_Z1"];
+            numericUpDownXzZ2.Value = (int)FormMain.Settings.config_cs["limitXZ_Z2"];
             checkBoxLimitY.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["limitY_enable"]);
-            numericUpDownLimitY.Value = FormMain.Settings.config_cs["limitY"];
+            numericUpDownLimitY.Value = (int)FormMain.Settings.config_cs["limitY"];
             checkBoxHeightmap.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["heightmap_enable"]);
-            numericUpDownHeightmapJ.Value = FormMain.Settings.config_cs["heightmap_j"];
-            numericUpDownHeightmapDivider.Value = FormMain.Settings.config_cs["heightmap_divider"];
-            numericUpDownHeightmapOffset.Value = FormMain.Settings.config_cs["heightmap_offset"];
+            numericUpDownHeightmapJ.Value = (int)FormMain.Settings.config_cs["heightmap_j"];
+            numericUpDownHeightmapDivider.Value = (int)FormMain.Settings.config_cs["heightmap_divider"];
+            numericUpDownHeightmapOffset.Value = (int)FormMain.Settings.config_cs["heightmap_offset"];
             comboBoxDimension.SelectedIndex = (int)FormMain.Settings.config_cs["dimension"];
             comboBoxProfile.SelectedItem = FormMain.Settings.config_cs["profile"];
             textBoxHtmlFilename.Text = FormMain.Settings.config_cs["html_filename"];
             comboBoxImgFormat.SelectedItem = FormMain.Settings.config_cs["image_format"];
-            numericUpDownImgQuality.Value = FormMain.Settings.config_cs["image_quality"];
-            checkBoxForceOverwrite.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["force_overwrite"]);
-            checkBoxLeaflet.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["leaflet"]);
+            numericUpDownImgQuality.Value = (int)FormMain.Settings.config_cs["image_quality"];
+            checkBoxForceOverwrite.Checked = (bool)FormMain.Settings.config_cs["force_overwrite"];
+            checkBoxLeaflet.Checked = (bool)FormMain.Settings.config_cs["leaflet"];
             #endregion
         }
 
@@ -120,24 +128,24 @@ namespace papyrus_gui
             #region Save Settings
             #region .cs
             FormMain.Settings.config_cs["executable"] = pathExeCS;
-            FormMain.Settings.config_cs["limitXZ_enable"] = checkBoxLimitXZ.Checked;
-            FormMain.Settings.config_cs["limitXZ_X1"] = numericUpDownXzX1.Value;
-            FormMain.Settings.config_cs["limitXZ_X2"] = numericUpDownXzX2.Value;
-            FormMain.Settings.config_cs["limitXZ_Z1"] = numericUpDownXzZ1.Value;
-            FormMain.Settings.config_cs["limitXZ_Z2"] = numericUpDownXzZ2.Value;
-            FormMain.Settings.config_cs["limitY_enable"] = checkBoxLimitY.Checked;
-            FormMain.Settings.config_cs["limitY"] = numericUpDownLimitY.Value;
-            FormMain.Settings.config_cs["heightmap_enable"] = checkBoxHeightmap.Checked;
-            FormMain.Settings.config_cs["heightmap_j"] = numericUpDownHeightmapJ.Value;
-            FormMain.Settings.config_cs["heightmap_divider"] = numericUpDownHeightmapDivider.Value;
-            FormMain.Settings.config_cs["heightmap_offset"] = numericUpDownHeightmapOffset.Value;
+            FormMain.Settings.config_cs["limitXZ_enable"] = (bool)checkBoxLimitXZ.Checked;
+            FormMain.Settings.config_cs["limitXZ_X1"] = (int)numericUpDownXzX1.Value;
+            FormMain.Settings.config_cs["limitXZ_X2"] = (int)numericUpDownXzX2.Value;
+            FormMain.Settings.config_cs["limitXZ_Z1"] = (int)numericUpDownXzZ1.Value;
+            FormMain.Settings.config_cs["limitXZ_Z2"] = (int)numericUpDownXzZ2.Value;
+            FormMain.Settings.config_cs["limitY_enable"] = (bool)checkBoxLimitY.Checked;
+            FormMain.Settings.config_cs["limitY"] = (int)numericUpDownLimitY.Value;
+            FormMain.Settings.config_cs["heightmap_enable"] = (bool)checkBoxHeightmap.Checked;
+            FormMain.Settings.config_cs["heightmap_j"] = (int)numericUpDownHeightmapJ.Value;
+            FormMain.Settings.config_cs["heightmap_divider"] = (int)numericUpDownHeightmapDivider.Value;
+            FormMain.Settings.config_cs["heightmap_offset"] = (int)numericUpDownHeightmapOffset.Value;
             FormMain.Settings.config_cs["dimension"] = comboBoxDimension.SelectedIndex;
             FormMain.Settings.config_cs["profile"] = comboBoxProfile.SelectedItem.ToString();
             FormMain.Settings.config_cs["html_filename"] = textBoxHtmlFilename.Text;
             FormMain.Settings.config_cs["image_format"] = comboBoxImgFormat.SelectedItem.ToString();
-            FormMain.Settings.config_cs["image_quality"] = numericUpDownImgQuality.Value;
-            FormMain.Settings.config_cs["force_overwrite"] = checkBoxForceOverwrite.Checked;
-            FormMain.Settings.config_cs["leaflet"] = checkBoxLeaflet.Checked;
+            FormMain.Settings.config_cs["image_quality"] = (int)numericUpDownImgQuality.Value;
+            FormMain.Settings.config_cs["force_overwrite"] = (bool)checkBoxForceOverwrite.Checked;
+            FormMain.Settings.config_cs["leaflet"] = (bool)checkBoxLeaflet.Checked;
             #endregion
             //
             #region .js

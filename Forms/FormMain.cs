@@ -85,7 +85,27 @@ namespace papyrus_gui
             statusCheckTimer.AutoReset = true;
             statusCheckTimer.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
-                buttonRender.Text = "Start rendering!";
+                if (_status == ProcessingStatus.RENDERING)
+                {
+                    buttonConfigure.Enabled = false;
+                    buttonSelect1.Enabled = false;
+                    buttonSelect2.Enabled = false;
+                    comboBoxVersion.Enabled = false;
+                    textBoxWorld.ReadOnly = true;
+                    textBoxOutput.ReadOnly = true;
+                    buttonRender.Text = "STOP RENDERING!";
+                }
+                else
+                {
+                    buttonConfigure.Enabled = true;
+                    buttonSelect1.Enabled = true;
+                    buttonSelect2.Enabled = true;
+                    comboBoxVersion.Enabled = true;
+                    textBoxWorld.ReadOnly = false;
+                    textBoxOutput.ReadOnly = false;
+                    buttonRender.Text = "Start rendering!";
+                }
+
                 switch (_status)
                 {
                     case ProcessingStatus.IDLE:
@@ -94,7 +114,6 @@ namespace papyrus_gui
 
                     case ProcessingStatus.RENDERING:
                         statusLabel.Text = "Rendering";
-                        buttonRender.Text = "STOP RENDERING!";
                         break;
 
                     case ProcessingStatus.FINISHED:
@@ -181,10 +200,6 @@ namespace papyrus_gui
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            formConfigure.Show();
-        }
         private void ButtonSelect1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserInput = new FolderBrowserDialog();
@@ -246,6 +261,7 @@ namespace papyrus_gui
                                     _renderProcess.Close();
                                 }));
 
+                                formConfigure.Close();
                                 _logContent.Clear();
                                 renderThread.Start();
                                 _status = ProcessingStatus.RENDERING;
@@ -313,12 +329,14 @@ namespace papyrus_gui
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Environment.Exit(0);
+            this.Close();
         }
+
         private void DiscordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PromptOpenLink(@"https://discordapp.com/invite/J2sBaXa");
         }
+
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(String.Format("papyrus.gui version {0} build {1} by clarkx86 & DeepBlue", AppVersion, Assembly.GetExecutingAssembly().GetName().Version.Build), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -368,6 +386,11 @@ namespace papyrus_gui
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateCheck(true);
+        }
+
+        private void buttonConfigure_Click(object sender, EventArgs e)
+        {
+            formConfigure.Show();
         }
     }
 }

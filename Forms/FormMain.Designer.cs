@@ -52,7 +52,7 @@
             this.checkBoxEnableConsoleOutput = new System.Windows.Forms.CheckBox();
             this.richTextBoxConsoleOutput = new System.Windows.Forms.RichTextBox();
             this.buttonRender = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonConfigure = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabelTag = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -286,16 +286,16 @@
             this.buttonRender.UseVisualStyleBackColor = true;
             this.buttonRender.Click += new System.EventHandler(this.ButtonRender_Click);
             // 
-            // button1
+            // buttonConfigure
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(698, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 21);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Configure";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.buttonConfigure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonConfigure.Location = new System.Drawing.Point(698, 27);
+            this.buttonConfigure.Name = "buttonConfigure";
+            this.buttonConfigure.Size = new System.Drawing.Size(75, 21);
+            this.buttonConfigure.TabIndex = 11;
+            this.buttonConfigure.Text = "Configure";
+            this.buttonConfigure.UseVisualStyleBackColor = true;
+            this.buttonConfigure.Click += new System.EventHandler(this.buttonConfigure_Click);
             // 
             // statusStrip
             // 
@@ -326,7 +326,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonConfigure);
             this.Controls.Add(this.buttonRender);
             this.Controls.Add(this.groupBox);
             this.Controls.Add(this.buttonSelect2);
@@ -374,7 +374,7 @@
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.RichTextBox richTextBoxConsoleOutput;
         private System.Windows.Forms.Button buttonRender;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonConfigure;
         private System.Windows.Forms.ToolStripMenuItem discordToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxEnableConsoleOutput;
         private System.Windows.Forms.StatusStrip statusStrip;

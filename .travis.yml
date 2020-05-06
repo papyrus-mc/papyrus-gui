@@ -9,13 +9,16 @@ env:
     - REPO_NAME=$(echo $TRAVIS_BUILD_DIR | sed -r 's/^.+\///g')
     - TAG_CLEAN="$(if [ -z $TRAVIS_TAG ]; then echo '1.0.0'; else echo $(echo $TRAVIS_TAG | sed -r 's/^v//g'); fi)"
     - ASSEMBLY_VERSION=$(echo $TAG_CLEAN | sed -r "s/^.+\./&${TRAVIS_BUILD_NUMBER}./g")
-    - DOCKER_SRC_DIR=/usr/src/${REPO_NAME}
+    - SRC_MOUNT=/usr/src/${REPO_NAME}
+  jobs:
+    - RUNTIME=win-x64
 before_install:
   - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
-  - docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${DOCKER_SRC_DIR} -w ${DOCKER_SRC_DIR} mono
+  - sed -r -i 's/[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+/${ASSEMBLY_VERSION}/' Properties/AssemblyInfo.cs
+  - docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${SRC_MOUNT} -w ${SRC_MOUNT} mono
   - docker exec mono_build nuget restore
 script:
-  - docker exec mono_build msbuild papyrus-gui.csproj /p:Configuration=Release
+  - docker exec mono_build msbuild papyrus-gui.csproj /p:Configuration=Release /p:Platform=x64
 before_deploy:
-  - cd ~/build/${TRAVIS_REPO_SLUG}/bin/Release
+  - cd ~/build/${TRAVIS_REPO_SLUG}/bin/x64/Release
   - zip ${ARTIFACT_NAME}.zip ./*
