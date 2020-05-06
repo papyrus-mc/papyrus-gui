@@ -3,22 +3,33 @@ dist: xenial
 language: csharp
 mono: none
 services:
-  - docker
+- docker
 env:
-  global: 
-    - REPO_NAME=$(echo $TRAVIS_BUILD_DIR | sed -r 's/^.+\///g')
-    - TAG_CLEAN="$(if [ -z $TRAVIS_TAG ]; then echo '1.0.0'; else echo $(echo $TRAVIS_TAG | sed -r 's/^v//g'); fi)"
-    - ASSEMBLY_VERSION=$(echo $TAG_CLEAN | sed -r 's/^.+\./&'$TRAVIS_BUILD_NUMBER'./g')
-    - SRC_MOUNT=/usr/src/${REPO_NAME}
+  global:
+  - REPO_NAME=$(echo $TRAVIS_BUILD_DIR | sed -r 's/^.+\///g')
+  - TAG_CLEAN="$(if [ -z $TRAVIS_TAG ]; then echo '1.0.0'; else echo $(echo $TRAVIS_TAG | sed -r 's/^v//g'); fi)"
+  - ASSEMBLY_VERSION=$(echo $TAG_CLEAN | sed -r 's/^.+\./&'$TRAVIS_BUILD_NUMBER'./g')
+  - SRC_MOUNT=/usr/src/${REPO_NAME}
   jobs:
-    - RUNTIME=win-x64
+  - RUNTIME=win-x64
 before_install:
-  - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
-  - sed -r -i 's/[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+/'$ASSEMBLY_VERSION'/' Properties/AssemblyInfo.cs
-  - docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${SRC_MOUNT} -w ${SRC_MOUNT} mono
-  - docker exec mono_build nuget restore
+- ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
+- sed -r -i 's/[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+/'$ASSEMBLY_VERSION'/'
+  Properties/AssemblyInfo.cs
+- docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${SRC_MOUNT} -w
+  ${SRC_MOUNT} mono
+- docker exec mono_build nuget restore
 script:
-  - docker exec mono_build msbuild papyrus-gui.csproj /p:Configuration=Release /p:Platform=x64
+- docker exec mono_build msbuild papyrus-gui.csproj /p:Configuration=Release /p:Platform=x64
 before_deploy:
-  - cd ~/build/${TRAVIS_REPO_SLUG}/bin/x64/Release
-  - zip ${ARTIFACT_NAME}.zip ./*
+- cd ~/build/${TRAVIS_REPO_SLUG}/bin/x64/Release
+- zip ${ARTIFACT_NAME}.zip ./*
+deploy:
+  provider: releases
+  api_key:
+    secure: geZjyOpgkWaqvzgc9js4EaTwuuLuImrOXKKFDwkDspPuLnpHnsNTLOVhftKQ2DL/bTQIrlfT2uuzfttnpbRmHoPCUGtNFbuRNGoUIpgWJSsO7QiggeJPN7o9s8baAC3vhvpgJXWkGdx3ZPf65X2M9XaITgu3JhQhUiMgz4uJnKj2tWF3xIKOWUR2DoyPKvpHBDvwDb3NngYDEOU27DqVU5Q4y/EcDLeyiKi5+ERe4941DcfMv/xUDIvBToO+MixcMO53QnhOwDxCRGn4oVhRpynAbvysYb3qcuUeHnZD8co6J4i9yY8BlLVoe2uq+f+igfHkxjkwbrF6hEQEOCek0WPTjCOj9nPqw8gR3g/zTcJhsDHNiQMZL9QjpJVtpw4ACGdPBRVDyi8h/fiWC81lXqv3bybrBqTsa8xAgOB45trxIlk/w3CBOw15zfGlAEpePf2rFJ3Ol2bW2wVq4kYO3SFRn3vleAsCP0CFE5ZvI5hYcZXYEr6VgqM/uvdm9gCK0kQHlRdVa0nM8rMgQQrefgD6n/HRe/Avcb/YiF7MPdPdxZV+9pW2a9axfmyHmMKz+92w4ORuruEeZKQnvyDc30DZuHNMXK/K651FNHCK04xIB3SHBuqRfmB9Cw4lw+y+9PKs1GVTK25NRQW8zHZNebRty3CXcsQEeWeruX0WDvY=
+  file: ${ARTIFACT_NAME}.zip.zip
+  on:
+    repo: clarkx86/papyrus-gui
+    tags: true
+  skip_cleanup: 'true'
