@@ -39,6 +39,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.numericUpDownHeightmapDivider = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownHeightmapOffset = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownHeightmapJ = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownImgQuality = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownLimitY = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownXzZ2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownXzZ1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownXzX2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownXzX1 = new System.Windows.Forms.NumericUpDown();
             this.buttonCopyArgumentsCs = new System.Windows.Forms.Button();
             this.checkBoxLeaflet = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -64,29 +73,20 @@
             this.labelLimitY = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDownXzX1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownXzX2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownXzZ1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownXzZ2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownLimitY = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownImgQuality = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownHeightmapJ = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownHeightmapOffset = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownHeightmapDivider = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimitY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownImgQuality)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapJ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapDivider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapJ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownImgQuality)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimitY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX1)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -231,6 +231,109 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "PapyrusCS";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDownHeightmapDivider
+            // 
+            this.numericUpDownHeightmapDivider.Location = new System.Drawing.Point(226, 101);
+            this.numericUpDownHeightmapDivider.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownHeightmapDivider.Name = "numericUpDownHeightmapDivider";
+            this.numericUpDownHeightmapDivider.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownHeightmapDivider.TabIndex = 41;
+            this.numericUpDownHeightmapDivider.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownHeightmapOffset
+            // 
+            this.numericUpDownHeightmapOffset.Location = new System.Drawing.Point(226, 126);
+            this.numericUpDownHeightmapOffset.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.numericUpDownHeightmapOffset.Name = "numericUpDownHeightmapOffset";
+            this.numericUpDownHeightmapOffset.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownHeightmapOffset.TabIndex = 40;
+            this.numericUpDownHeightmapOffset.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownHeightmapJ
+            // 
+            this.numericUpDownHeightmapJ.Location = new System.Drawing.Point(226, 77);
+            this.numericUpDownHeightmapJ.Name = "numericUpDownHeightmapJ";
+            this.numericUpDownHeightmapJ.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownHeightmapJ.TabIndex = 39;
+            // 
+            // numericUpDownImgQuality
+            // 
+            this.numericUpDownImgQuality.Location = new System.Drawing.Point(226, 198);
+            this.numericUpDownImgQuality.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownImgQuality.Name = "numericUpDownImgQuality";
+            this.numericUpDownImgQuality.Size = new System.Drawing.Size(70, 20);
+            this.numericUpDownImgQuality.TabIndex = 38;
+            this.numericUpDownImgQuality.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownLimitY
+            // 
+            this.numericUpDownLimitY.Location = new System.Drawing.Point(151, 53);
+            this.numericUpDownLimitY.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.numericUpDownLimitY.Name = "numericUpDownLimitY";
+            this.numericUpDownLimitY.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownLimitY.TabIndex = 37;
+            this.numericUpDownLimitY.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownXzZ2
+            // 
+            this.numericUpDownXzZ2.Location = new System.Drawing.Point(257, 29);
+            this.numericUpDownXzZ2.Name = "numericUpDownXzZ2";
+            this.numericUpDownXzZ2.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzZ2.TabIndex = 36;
+            // 
+            // numericUpDownXzZ1
+            // 
+            this.numericUpDownXzZ1.Location = new System.Drawing.Point(257, 5);
+            this.numericUpDownXzZ1.Name = "numericUpDownXzZ1";
+            this.numericUpDownXzZ1.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzZ1.TabIndex = 35;
+            // 
+            // numericUpDownXzX2
+            // 
+            this.numericUpDownXzX2.Location = new System.Drawing.Point(151, 29);
+            this.numericUpDownXzX2.Name = "numericUpDownXzX2";
+            this.numericUpDownXzX2.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzX2.TabIndex = 34;
+            // 
+            // numericUpDownXzX1
+            // 
+            this.numericUpDownXzX1.Location = new System.Drawing.Point(151, 5);
+            this.numericUpDownXzX1.Name = "numericUpDownXzX1";
+            this.numericUpDownXzX1.Size = new System.Drawing.Size(40, 20);
+            this.numericUpDownXzX1.TabIndex = 33;
             // 
             // buttonCopyArgumentsCs
             // 
@@ -493,104 +596,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Not available...";
             // 
-            // numericUpDownXzX1
-            // 
-            this.numericUpDownXzX1.Location = new System.Drawing.Point(151, 5);
-            this.numericUpDownXzX1.Name = "numericUpDownXzX1";
-            this.numericUpDownXzX1.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDownXzX1.TabIndex = 33;
-            // 
-            // numericUpDownXzX2
-            // 
-            this.numericUpDownXzX2.Location = new System.Drawing.Point(151, 29);
-            this.numericUpDownXzX2.Name = "numericUpDownXzX2";
-            this.numericUpDownXzX2.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDownXzX2.TabIndex = 34;
-            // 
-            // numericUpDownXzZ1
-            // 
-            this.numericUpDownXzZ1.Location = new System.Drawing.Point(257, 5);
-            this.numericUpDownXzZ1.Name = "numericUpDownXzZ1";
-            this.numericUpDownXzZ1.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDownXzZ1.TabIndex = 35;
-            // 
-            // numericUpDownXzZ2
-            // 
-            this.numericUpDownXzZ2.Location = new System.Drawing.Point(257, 29);
-            this.numericUpDownXzZ2.Name = "numericUpDownXzZ2";
-            this.numericUpDownXzZ2.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDownXzZ2.TabIndex = 36;
-            // 
-            // numericUpDownLimitY
-            // 
-            this.numericUpDownLimitY.Location = new System.Drawing.Point(151, 53);
-            this.numericUpDownLimitY.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.numericUpDownLimitY.Name = "numericUpDownLimitY";
-            this.numericUpDownLimitY.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDownLimitY.TabIndex = 37;
-            this.numericUpDownLimitY.Value = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDownImgQuality
-            // 
-            this.numericUpDownImgQuality.Location = new System.Drawing.Point(226, 198);
-            this.numericUpDownImgQuality.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownImgQuality.Name = "numericUpDownImgQuality";
-            this.numericUpDownImgQuality.Size = new System.Drawing.Size(70, 20);
-            this.numericUpDownImgQuality.TabIndex = 38;
-            this.numericUpDownImgQuality.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDownHeightmapJ
-            // 
-            this.numericUpDownHeightmapJ.Location = new System.Drawing.Point(226, 77);
-            this.numericUpDownHeightmapJ.Name = "numericUpDownHeightmapJ";
-            this.numericUpDownHeightmapJ.Size = new System.Drawing.Size(70, 20);
-            this.numericUpDownHeightmapJ.TabIndex = 39;
-            // 
-            // numericUpDownHeightmapOffset
-            // 
-            this.numericUpDownHeightmapOffset.Location = new System.Drawing.Point(226, 126);
-            this.numericUpDownHeightmapOffset.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.numericUpDownHeightmapOffset.Name = "numericUpDownHeightmapOffset";
-            this.numericUpDownHeightmapOffset.Size = new System.Drawing.Size(70, 20);
-            this.numericUpDownHeightmapOffset.TabIndex = 40;
-            this.numericUpDownHeightmapOffset.Value = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDownHeightmapDivider
-            // 
-            this.numericUpDownHeightmapDivider.Location = new System.Drawing.Point(226, 101);
-            this.numericUpDownHeightmapDivider.Name = "numericUpDownHeightmapDivider";
-            this.numericUpDownHeightmapDivider.Size = new System.Drawing.Size(70, 20);
-            this.numericUpDownHeightmapDivider.TabIndex = 41;
-            this.numericUpDownHeightmapDivider.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            // 
             // FormConfigure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -612,17 +617,17 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapDivider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapJ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownImgQuality)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimitY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzX2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXzZ2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLimitY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownImgQuality)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapJ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapOffset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightmapDivider)).EndInit();
             this.ResumeLayout(false);
 
         }
