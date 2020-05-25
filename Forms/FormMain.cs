@@ -226,6 +226,7 @@ namespace papyrus_gui
             if (checkBoxEnableConsoleOutput.Checked)
             {
                 _logContent.Append(stdOut);
+                richTextBoxConsoleOutput.Clear();
                 richTextBoxConsoleOutput.Lines = _logContent.Lines;
                 richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.TextLength;
                 richTextBoxConsoleOutput.ScrollToCaret();
@@ -261,14 +262,18 @@ namespace papyrus_gui
                                     _renderProcess.StartInfo.RedirectStandardOutput = true;
                                     _renderProcess.StartInfo.CreateNoWindow = true;
                                     _renderProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                                    _renderProcess.StartInfo.RedirectStandardError = true;
+                                    _renderProcess.ErrorDataReceived += (object errorSender, DataReceivedEventArgs errorEventArgs) =>
+                                    {
+                                        MessageBox.Show(String.Format("An error occured while rendering your world!\n{0}", errorEventArgs.Data), "An error occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    };
+                                    _renderProcess.OutputDataReceived += (object threadSender, DataReceivedEventArgs eArgs) => { this.UHandler?.Invoke(eArgs.Data); };
+                                    
                                     _renderProcess.Start();
-
                                     _renderProcess.BeginOutputReadLine();
 
-                                    // _renderProcess.Exited += (object threadSender, EventArgs eArgs) => { this.ProcessExitHandler?.Invoke(_renderProcess.ExitCode); };
-                                    _renderProcess.OutputDataReceived += (object threadSender, DataReceivedEventArgs eArgs) => { this.UHandler?.Invoke(eArgs.Data); };
-
                                     _renderProcess.WaitForExit();
+
                                     ProcessExitHandler?.Invoke(_renderProcess.ExitCode);
                                     _renderProcess.Close();
                                 }));

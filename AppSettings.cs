@@ -23,6 +23,7 @@ namespace papyrus_gui
             this.config_cs["limitXZ_X2"] = 0;
             this.config_cs["limitXZ_Z1"] = 0;
             this.config_cs["limitXZ_Z2"] = 0;
+            this.config_cs["ingame_coords"] = true;
             this.config_cs["limitY_enable"] = false;
             this.config_cs["limitY"] = 64;
             this.config_cs["heightmap_enable"] = true;
@@ -60,7 +61,8 @@ namespace papyrus_gui
 
                     if (this.config_cs["limitXZ_enable"])
                     {
-                        additionalArgs[1] = String.Format("--limitx {0},{1} --limitz {2},{3}", this.config_cs["limitXZ_X1"], this.config_cs["limitXZ_X2"], this.config_cs["limitXZ_Z1"], this.config_cs["limitXZ_Z2"]);
+                        int divider = this.config_cs["ingame_coords"] ? 16 : 1;
+                        additionalArgs[1] = String.Format("--limitx {0},{1} --limitz {2},{3}", this.config_cs["limitXZ_X1"] / divider, this.config_cs["limitXZ_X2"] / divider, this.config_cs["limitXZ_Z1"] / divider, this.config_cs["limitXZ_Z2"] / divider);
                     }
 
                     arguments = String.Format(exePath + "-w \"{0}\" -o \"{1}\" --dim {2} -f {3} {4} --brillouin_j {5} --brillouin_divider {6} --brillouin_offset {7} --forceoverwrite {8} --use_leaflet_legacy {9} --htmlfile {10} {11} {12}", worldPath, outputPath, this.config_cs["dimension"], this.config_cs["image_format"].ToString().ToLower(), this.config_cs["image_quality"], this.config_cs["heightmap_j"], this.config_cs["heightmap_divider"], this.config_cs["heightmap_offset"], Convert.ToString(this.config_cs["force_overwrite"]).ToLower(), Convert.ToString(this.config_cs["leaflet"]).ToLower(), this.config_cs["html_filename"], additionalArgs[0], additionalArgs[1]);

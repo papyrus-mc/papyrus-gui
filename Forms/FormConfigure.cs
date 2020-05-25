@@ -141,6 +141,7 @@ namespace papyrus_gui
             FormMain.Settings.config_cs["limitXZ_X2"] = (int)numericUpDownXzX2.Value;
             FormMain.Settings.config_cs["limitXZ_Z1"] = (int)numericUpDownXzZ1.Value;
             FormMain.Settings.config_cs["limitXZ_Z2"] = (int)numericUpDownXzZ2.Value;
+            FormMain.Settings.config_cs["ingame_coords"] = (bool)checkBoxIngameCoordinates.Checked;
             FormMain.Settings.config_cs["limitY_enable"] = (bool)checkBoxLimitY.Checked;
             FormMain.Settings.config_cs["limitY"] = (int)numericUpDownLimitY.Value;
             FormMain.Settings.config_cs["heightmap_enable"] = (bool)checkBoxHeightmap.Checked;
@@ -159,23 +160,6 @@ namespace papyrus_gui
             #region .js
             #endregion
             #endregion
-        }
-
-        public String GetArguments(PapyrusVariant variant)
-        {
-            string arguments = "";
-            switch (variant)
-            {
-                case PapyrusVariant.PAPYRUSCS:
-                    arguments = "";
-                    break;
-
-                case PapyrusVariant.PAPYRUSJS:
-                    // Not available
-                    break;
-            }
-
-            return arguments;
         }
     }
 }

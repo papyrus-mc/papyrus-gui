@@ -73,6 +73,7 @@
             this.labelLimitY = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxIngameCoordinates = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -170,7 +171,7 @@
             this.groupBox2.Controls.Add(this.tabControl1);
             this.groupBox2.Location = new System.Drawing.Point(10, 93);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(320, 346);
+            this.groupBox2.Size = new System.Drawing.Size(320, 371);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Additional arguments";
@@ -186,11 +187,12 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(309, 323);
+            this.tabControl1.Size = new System.Drawing.Size(309, 348);
             this.tabControl1.TabIndex = 13;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkBoxIngameCoordinates);
             this.tabPage1.Controls.Add(this.numericUpDownHeightmapDivider);
             this.tabPage1.Controls.Add(this.numericUpDownHeightmapOffset);
             this.tabPage1.Controls.Add(this.numericUpDownHeightmapJ);
@@ -227,14 +229,14 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(301, 297);
+            this.tabPage1.Size = new System.Drawing.Size(301, 322);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "PapyrusCS";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // numericUpDownHeightmapDivider
             // 
-            this.numericUpDownHeightmapDivider.Location = new System.Drawing.Point(226, 101);
+            this.numericUpDownHeightmapDivider.Location = new System.Drawing.Point(226, 126);
             this.numericUpDownHeightmapDivider.Minimum = new decimal(new int[] {
             1,
             0,
@@ -251,7 +253,7 @@
             // 
             // numericUpDownHeightmapOffset
             // 
-            this.numericUpDownHeightmapOffset.Location = new System.Drawing.Point(226, 126);
+            this.numericUpDownHeightmapOffset.Location = new System.Drawing.Point(226, 151);
             this.numericUpDownHeightmapOffset.Maximum = new decimal(new int[] {
             256,
             0,
@@ -268,14 +270,14 @@
             // 
             // numericUpDownHeightmapJ
             // 
-            this.numericUpDownHeightmapJ.Location = new System.Drawing.Point(226, 77);
+            this.numericUpDownHeightmapJ.Location = new System.Drawing.Point(226, 102);
             this.numericUpDownHeightmapJ.Name = "numericUpDownHeightmapJ";
             this.numericUpDownHeightmapJ.Size = new System.Drawing.Size(70, 20);
             this.numericUpDownHeightmapJ.TabIndex = 39;
             // 
             // numericUpDownImgQuality
             // 
-            this.numericUpDownImgQuality.Location = new System.Drawing.Point(226, 198);
+            this.numericUpDownImgQuality.Location = new System.Drawing.Point(226, 223);
             this.numericUpDownImgQuality.Minimum = new decimal(new int[] {
             1,
             0,
@@ -292,7 +294,7 @@
             // 
             // numericUpDownLimitY
             // 
-            this.numericUpDownLimitY.Location = new System.Drawing.Point(151, 53);
+            this.numericUpDownLimitY.Location = new System.Drawing.Point(151, 78);
             this.numericUpDownLimitY.Maximum = new decimal(new int[] {
             256,
             0,
@@ -339,7 +341,7 @@
             // 
             this.buttonCopyArgumentsCs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCopyArgumentsCs.Location = new System.Drawing.Point(5, 269);
+            this.buttonCopyArgumentsCs.Location = new System.Drawing.Point(6, 294);
             this.buttonCopyArgumentsCs.Name = "buttonCopyArgumentsCs";
             this.buttonCopyArgumentsCs.Size = new System.Drawing.Size(291, 23);
             this.buttonCopyArgumentsCs.TabIndex = 32;
@@ -350,7 +352,7 @@
             // checkBoxLeaflet
             // 
             this.checkBoxLeaflet.AutoSize = true;
-            this.checkBoxLeaflet.Location = new System.Drawing.Point(107, 246);
+            this.checkBoxLeaflet.Location = new System.Drawing.Point(107, 271);
             this.checkBoxLeaflet.Name = "checkBoxLeaflet";
             this.checkBoxLeaflet.Size = new System.Drawing.Size(189, 17);
             this.checkBoxLeaflet.TabIndex = 31;
@@ -360,7 +362,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(120, 128);
+            this.label14.Location = new System.Drawing.Point(120, 153);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(38, 13);
@@ -370,7 +372,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(120, 103);
+            this.label13.Location = new System.Drawing.Point(120, 128);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(43, 13);
@@ -380,7 +382,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(120, 79);
+            this.label12.Location = new System.Drawing.Point(120, 104);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(52, 13);
@@ -390,7 +392,7 @@
             // checkBoxForceOverwrite
             // 
             this.checkBoxForceOverwrite.AutoSize = true;
-            this.checkBoxForceOverwrite.Location = new System.Drawing.Point(8, 246);
+            this.checkBoxForceOverwrite.Location = new System.Drawing.Point(8, 271);
             this.checkBoxForceOverwrite.Name = "checkBoxForceOverwrite";
             this.checkBoxForceOverwrite.Size = new System.Drawing.Size(99, 17);
             this.checkBoxForceOverwrite.TabIndex = 24;
@@ -407,7 +409,7 @@
             "Aquatic",
             "Ore",
             "Stronghold"});
-            this.comboBoxProfile.Location = new System.Drawing.Point(94, 173);
+            this.comboBoxProfile.Location = new System.Drawing.Point(94, 198);
             this.comboBoxProfile.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxProfile.Name = "comboBoxProfile";
             this.comboBoxProfile.Size = new System.Drawing.Size(202, 21);
@@ -416,7 +418,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 176);
+            this.label11.Location = new System.Drawing.Point(5, 201);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(39, 13);
@@ -426,7 +428,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(176, 200);
+            this.label10.Location = new System.Drawing.Point(176, 225);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(42, 13);
@@ -441,7 +443,7 @@
             "PNG",
             "WebP",
             "JPG"});
-            this.comboBoxImgFormat.Location = new System.Drawing.Point(94, 197);
+            this.comboBoxImgFormat.Location = new System.Drawing.Point(94, 222);
             this.comboBoxImgFormat.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxImgFormat.Name = "comboBoxImgFormat";
             this.comboBoxImgFormat.Size = new System.Drawing.Size(78, 21);
@@ -450,7 +452,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(5, 200);
+            this.label9.Location = new System.Drawing.Point(5, 225);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(71, 13);
@@ -465,7 +467,7 @@
             "Overworld",
             "Nether",
             "The End"});
-            this.comboBoxDimension.Location = new System.Drawing.Point(94, 149);
+            this.comboBoxDimension.Location = new System.Drawing.Point(94, 174);
             this.comboBoxDimension.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxDimension.Name = "comboBoxDimension";
             this.comboBoxDimension.Size = new System.Drawing.Size(202, 21);
@@ -474,7 +476,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 151);
+            this.label8.Location = new System.Drawing.Point(5, 176);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 13);
@@ -520,7 +522,7 @@
             // 
             // textBoxHtmlFilename
             // 
-            this.textBoxHtmlFilename.Location = new System.Drawing.Point(94, 222);
+            this.textBoxHtmlFilename.Location = new System.Drawing.Point(94, 247);
             this.textBoxHtmlFilename.Name = "textBoxHtmlFilename";
             this.textBoxHtmlFilename.Size = new System.Drawing.Size(202, 20);
             this.textBoxHtmlFilename.TabIndex = 10;
@@ -529,7 +531,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 224);
+            this.label3.Location = new System.Drawing.Point(5, 249);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 9;
@@ -547,7 +549,7 @@
             // checkBoxHeightmap
             // 
             this.checkBoxHeightmap.AutoSize = true;
-            this.checkBoxHeightmap.Location = new System.Drawing.Point(5, 78);
+            this.checkBoxHeightmap.Location = new System.Drawing.Point(5, 103);
             this.checkBoxHeightmap.Name = "checkBoxHeightmap";
             this.checkBoxHeightmap.Size = new System.Drawing.Size(113, 17);
             this.checkBoxHeightmap.TabIndex = 8;
@@ -557,7 +559,7 @@
             // checkBoxLimitY
             // 
             this.checkBoxLimitY.AutoSize = true;
-            this.checkBoxLimitY.Location = new System.Drawing.Point(5, 54);
+            this.checkBoxLimitY.Location = new System.Drawing.Point(5, 79);
             this.checkBoxLimitY.Name = "checkBoxLimitY";
             this.checkBoxLimitY.Size = new System.Drawing.Size(57, 17);
             this.checkBoxLimitY.TabIndex = 5;
@@ -567,7 +569,7 @@
             // labelLimitY
             // 
             this.labelLimitY.AutoSize = true;
-            this.labelLimitY.Location = new System.Drawing.Point(120, 55);
+            this.labelLimitY.Location = new System.Drawing.Point(120, 80);
             this.labelLimitY.Name = "labelLimitY";
             this.labelLimitY.Size = new System.Drawing.Size(17, 13);
             this.labelLimitY.TabIndex = 7;
@@ -596,18 +598,30 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Not available...";
             // 
+            // checkBoxIngameCoordinates
+            // 
+            this.checkBoxIngameCoordinates.AutoSize = true;
+            this.checkBoxIngameCoordinates.Checked = true;
+            this.checkBoxIngameCoordinates.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxIngameCoordinates.Location = new System.Drawing.Point(151, 55);
+            this.checkBoxIngameCoordinates.Name = "checkBoxIngameCoordinates";
+            this.checkBoxIngameCoordinates.Size = new System.Drawing.Size(122, 17);
+            this.checkBoxIngameCoordinates.TabIndex = 42;
+            this.checkBoxIngameCoordinates.Text = "In-game coordinates";
+            this.checkBoxIngameCoordinates.UseVisualStyleBackColor = true;
+            // 
             // FormConfigure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 456);
+            this.ClientSize = new System.Drawing.Size(340, 481);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(356, 495);
+            this.MaximumSize = new System.Drawing.Size(356, 520);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(356, 495);
+            this.MinimumSize = new System.Drawing.Size(356, 520);
             this.Name = "FormConfigure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configure";
@@ -678,5 +692,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDownHeightmapDivider;
         private System.Windows.Forms.NumericUpDown numericUpDownHeightmapOffset;
         private System.Windows.Forms.NumericUpDown numericUpDownHeightmapJ;
+        private System.Windows.Forms.CheckBox checkBoxIngameCoordinates;
     }
 }
