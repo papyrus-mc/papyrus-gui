@@ -55,6 +55,7 @@ namespace papyrus_gui
             numericUpDownXzX2.Value = (int)FormMain.Settings.config_cs["limitXZ_X2"];
             numericUpDownXzZ1.Value = (int)FormMain.Settings.config_cs["limitXZ_Z1"];
             numericUpDownXzZ2.Value = (int)FormMain.Settings.config_cs["limitXZ_Z2"];
+            checkBoxIngameCoordinates.Checked = (bool)FormMain.Settings.config_cs["ingame_coords"];
             checkBoxLimitY.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["limitY_enable"]);
             numericUpDownLimitY.Value = (int)FormMain.Settings.config_cs["limitY"];
             checkBoxHeightmap.Checked = Convert.ToBoolean(FormMain.Settings.config_cs["heightmap_enable"]);

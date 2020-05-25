@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Timers;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
 
 namespace papyrus_gui
 {
@@ -32,12 +33,26 @@ namespace papyrus_gui
         public UpdateHandler UHandler;
         public ProcessExitedHandler ProcessExitHandler;
         public FormConfigure formConfigure;
-        public static AppSettings Settings;
+        public AppSettings Settings;
         public static string AppVersion = String.Format("{0}.{1}.{2}", Assembly.GetExecutingAssembly().GetName().Version.Major, Assembly.GetExecutingAssembly().GetName().Version.Minor, Assembly.GetExecutingAssembly().GetName().Version.Revision);
         private LogContent _logContent;
         private ProcessingStatus _status = ProcessingStatus.IDLE;
         public Process _renderProcess;
         private uint _uiRefreshTickingRate = 500;
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr handle, uint msg, IntPtr wParam, IntPtr lParam);
+
+        private enum WindowMessage
+        {
+            WM_VSCROLL = 0x0115
+        }
+
+        private enum ScrollbarMessage
+        {
+            SB_PAGEDOWN = 0x03,
+            SB_BOTTOM = 0x07
+        }
 
         public FormMain()
         {
@@ -129,6 +144,19 @@ namespace papyrus_gui
             checkForUpdateTimer.Start();
 
             formConfigure = new FormConfigure(this);
+
+            /*
+            // Write unhandled exceptions to timestamped crashlog-file
+            AppDomain.CurrentDomain.UnhandledException += (object sender, UnhandledExceptionEventArgs eArgs) =>
+            {
+                string fName = String.Format("./{0}_crashlog.txt", DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+                using (StreamWriter crashLogWriter = new StreamWriter(Path.GetFullPath(fName)))
+                {
+                    Exception e = ((Exception)eArgs.ExceptionObject);
+                    crashLogWriter.Write(e.Message);
+                }
+            };
+            */
         }
 
         public void UpdateCheck(bool notifyLatest)
@@ -191,7 +219,7 @@ namespace papyrus_gui
                 Settings.config["world"] = textBoxWorld.Text;
                 Settings.config["output"] = textBoxOutput.Text;
 
-                using (StreamWriter streamWriter = new StreamWriter(@".\configuration.json", false))
+                using (StreamWriter streamWriter = new StreamWriter("configuration.json", false))
                 {
                     streamWriter.Write(JsonConvert.SerializeObject(Settings, Formatting.Indented));
                 }
@@ -226,10 +254,10 @@ namespace papyrus_gui
             if (checkBoxEnableConsoleOutput.Checked)
             {
                 _logContent.Append(stdOut);
-                richTextBoxConsoleOutput.Clear();
+                // richTextBoxConsoleOutput.Clear();
                 richTextBoxConsoleOutput.Lines = _logContent.Lines;
-                richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.TextLength;
-                richTextBoxConsoleOutput.ScrollToCaret();
+                // richTextBoxConsoleOutput.SelectionStart = richTextBoxConsoleOutput.TextLength;
+                SendMessage(richTextBoxConsoleOutput.Handle, (uint)WindowMessage.WM_VSCROLL, (IntPtr)ScrollbarMessage.SB_BOTTOM, IntPtr.Zero);
             }
         }
 
@@ -256,8 +284,8 @@ namespace papyrus_gui
                                 Thread renderThread = new Thread(new ThreadStart(() =>
                                 {
                                     _renderProcess = new Process();
-                                    _renderProcess.StartInfo.FileName = FormMain.Settings.config_cs["executable"];
-                                    _renderProcess.StartInfo.Arguments = FormMain.Settings.GetArguments(PapyrusVariant.PAPYRUSCS, false, Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString()));
+                                    _renderProcess.StartInfo.FileName = Settings.config_cs["executable"];
+                                    _renderProcess.StartInfo.Arguments = Settings.GetArguments(PapyrusVariant.PAPYRUSCS, false, Path.GetFullPath(textBoxWorld.Text.ToString()), Path.GetFullPath(textBoxOutput.Text.ToString()));
                                     _renderProcess.StartInfo.UseShellExecute = false;
                                     _renderProcess.StartInfo.RedirectStandardOutput = true;
                                     _renderProcess.StartInfo.CreateNoWindow = true;

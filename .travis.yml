@@ -6,16 +6,18 @@ services:
 - docker
 env:
   global:
-  - REPO_NAME=$(echo $TRAVIS_BUILD_DIR | sed -r 's/^.+\///g')
-  - TAG_CLEAN="$(if [ -z $TRAVIS_TAG ]; then echo '1.0.0'; else echo $(echo $TRAVIS_TAG | sed -r 's/^v//g'); fi)"
-  - ASSEMBLY_VERSION=$(echo $TAG_CLEAN | sed -r 's/^.+\./&'$TRAVIS_BUILD_NUMBER'./g')
   - SRC_MOUNT=/usr/local/src/${REPO_NAME}
   jobs:
   - RUNTIME=win-x64
 before_install:
+- cd ~/build/clarkx86 && git clone https://github.com/clarkx86/common_ci-scripts.git && cd common_ci-scripts && chmod +x ./*
+- REPO_NAME=$(./get_repo-name.sh $TRAVIS_REPO_SLUG)
+- TAG_CLEAN=$(./get_tag_clean.sh $TRAVIS_TAG)
+- ASSEMBLY_VERSION=$(./format_assembly-version.sh $TAG_CLEAN $TRAVIS_BUILD_NUMBER)
 - ARTIFACT_NAME=${REPO_NAME}_${RUNTIME}_v${TAG_CLEAN}-${TRAVIS_BUILD_NUMBER}
-- sed -r -i 's/[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+/'$ASSEMBLY_VERSION'/'
-  Properties/AssemblyInfo.cs
+- ./patch_assemblyinfo-version.sh ~/build/${TRAVIS_REPO_SLUG}/Properties/AssemblyInfo.cs $ASSEMBLY_VERSION
+- cd ~/build/${TRAVIS_REPO_SLUG}
+install:
 - docker run --name mono_build -t -d -v ~/build/${TRAVIS_REPO_SLUG}:${SRC_MOUNT} -w $SRC_MOUNT mono
 - docker exec mono_build nuget restore
 script:
