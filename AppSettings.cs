@@ -36,7 +36,6 @@ namespace papyrus_gui
             config_cs["image_format"] = "PNG";
             config_cs["image_quality"] = 100;
             config_cs["force_overwrite"] = false;
-            config_cs["leaflet"] = false;
         }
 
         public string GetArguments(PapyrusVariant variant, bool includeExePath, string worldPath, string outputPath)
@@ -65,7 +64,7 @@ namespace papyrus_gui
                         additionalArgs[1] = String.Format("--limitx {0},{1} --limitz {2},{3}", config_cs["limitXZ_X1"] / divider, config_cs["limitXZ_X2"] / divider, config_cs["limitXZ_Z1"] / divider, config_cs["limitXZ_Z2"] / divider);
                     }
 
-                    arguments = String.Format(exePath + "-w \"{0}\" -o \"{1}\" --dim {2} -f {3} {4} --brillouin_j {5} --brillouin_divider {6} --brillouin_offset {7} --forceoverwrite {8} --use_leaflet_legacy {9} --htmlfile {10} {11} {12}", worldPath, outputPath, config_cs["dimension"], config_cs["image_format"].ToString().ToLower(), config_cs["image_quality"], config_cs["heightmap_j"], config_cs["heightmap_divider"], config_cs["heightmap_offset"], Convert.ToString(config_cs["force_overwrite"]).ToLower(), Convert.ToString(config_cs["leaflet"]).ToLower(), config_cs["html_filename"], additionalArgs[0], additionalArgs[1]);
+                    arguments = String.Format(exePath + "-w \"{0}\" -o \"{1}\" --dim {2} -f {3} {4} --brillouin_j {5} --brillouin_divider {6} --brillouin_offset {7} --forceoverwrite {8} --htmlfile {9} {10} {11}", worldPath, outputPath, config_cs["dimension"], config_cs["image_format"].ToString().ToLower(), config_cs["image_quality"], config_cs["heightmap_j"], config_cs["heightmap_divider"], config_cs["heightmap_offset"], Convert.ToString(config_cs["force_overwrite"]).ToLower(), config_cs["html_filename"], additionalArgs[0], additionalArgs[1]).Trim();
 
                     break;
 

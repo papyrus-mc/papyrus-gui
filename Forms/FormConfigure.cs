@@ -68,7 +68,6 @@ namespace papyrus_gui
             comboBoxImgFormat.SelectedItem = FormMain.Settings.config_cs["image_format"];
             numericUpDownImgQuality.Value = (int)FormMain.Settings.config_cs["image_quality"];
             checkBoxForceOverwrite.Checked = (bool)FormMain.Settings.config_cs["force_overwrite"];
-            checkBoxLeaflet.Checked = (bool)FormMain.Settings.config_cs["leaflet"];
             #endregion
         }
 
@@ -155,7 +154,6 @@ namespace papyrus_gui
             FormMain.Settings.config_cs["image_format"] = comboBoxImgFormat.SelectedItem.ToString();
             FormMain.Settings.config_cs["image_quality"] = (int)numericUpDownImgQuality.Value;
             FormMain.Settings.config_cs["force_overwrite"] = (bool)checkBoxForceOverwrite.Checked;
-            FormMain.Settings.config_cs["leaflet"] = (bool)checkBoxLeaflet.Checked;
             #endregion
             //
             #region .js

@@ -39,6 +39,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBoxIngameCoordinates = new System.Windows.Forms.CheckBox();
             this.numericUpDownHeightmapDivider = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownHeightmapOffset = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownHeightmapJ = new System.Windows.Forms.NumericUpDown();
@@ -49,7 +50,6 @@
             this.numericUpDownXzX2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownXzX1 = new System.Windows.Forms.NumericUpDown();
             this.buttonCopyArgumentsCs = new System.Windows.Forms.Button();
-            this.checkBoxLeaflet = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -73,7 +73,6 @@
             this.labelLimitY = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBoxIngameCoordinates = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -203,7 +202,6 @@
             this.tabPage1.Controls.Add(this.numericUpDownXzX2);
             this.tabPage1.Controls.Add(this.numericUpDownXzX1);
             this.tabPage1.Controls.Add(this.buttonCopyArgumentsCs);
-            this.tabPage1.Controls.Add(this.checkBoxLeaflet);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.label12);
@@ -233,6 +231,18 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "PapyrusCS";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxIngameCoordinates
+            // 
+            this.checkBoxIngameCoordinates.AutoSize = true;
+            this.checkBoxIngameCoordinates.Checked = true;
+            this.checkBoxIngameCoordinates.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxIngameCoordinates.Location = new System.Drawing.Point(151, 55);
+            this.checkBoxIngameCoordinates.Name = "checkBoxIngameCoordinates";
+            this.checkBoxIngameCoordinates.Size = new System.Drawing.Size(122, 17);
+            this.checkBoxIngameCoordinates.TabIndex = 42;
+            this.checkBoxIngameCoordinates.Text = "In-game coordinates";
+            this.checkBoxIngameCoordinates.UseVisualStyleBackColor = true;
             // 
             // numericUpDownHeightmapDivider
             // 
@@ -348,16 +358,6 @@
             this.buttonCopyArgumentsCs.Text = "Copy command line arguments to clipboard";
             this.buttonCopyArgumentsCs.UseVisualStyleBackColor = true;
             this.buttonCopyArgumentsCs.Click += new System.EventHandler(this.buttonCopyArgumentsCs_Click);
-            // 
-            // checkBoxLeaflet
-            // 
-            this.checkBoxLeaflet.AutoSize = true;
-            this.checkBoxLeaflet.Location = new System.Drawing.Point(107, 271);
-            this.checkBoxLeaflet.Name = "checkBoxLeaflet";
-            this.checkBoxLeaflet.Size = new System.Drawing.Size(189, 17);
-            this.checkBoxLeaflet.TabIndex = 31;
-            this.checkBoxLeaflet.Text = "Use Leaflet instead of OpenLayers";
-            this.checkBoxLeaflet.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
@@ -583,7 +583,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(301, 297);
+            this.tabPage2.Size = new System.Drawing.Size(301, 322);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "papyrus.js";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -597,18 +597,6 @@
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Not available...";
-            // 
-            // checkBoxIngameCoordinates
-            // 
-            this.checkBoxIngameCoordinates.AutoSize = true;
-            this.checkBoxIngameCoordinates.Checked = true;
-            this.checkBoxIngameCoordinates.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIngameCoordinates.Location = new System.Drawing.Point(151, 55);
-            this.checkBoxIngameCoordinates.Name = "checkBoxIngameCoordinates";
-            this.checkBoxIngameCoordinates.Size = new System.Drawing.Size(122, 17);
-            this.checkBoxIngameCoordinates.TabIndex = 42;
-            this.checkBoxIngameCoordinates.Text = "In-game coordinates";
-            this.checkBoxIngameCoordinates.UseVisualStyleBackColor = true;
             // 
             // FormConfigure
             // 
@@ -681,7 +669,6 @@
         private System.Windows.Forms.CheckBox checkBoxForceOverwrite;
         private System.Windows.Forms.ComboBox comboBoxProfile;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox checkBoxLeaflet;
         private System.Windows.Forms.Button buttonCopyArgumentsCs;
         private System.Windows.Forms.NumericUpDown numericUpDownImgQuality;
         private System.Windows.Forms.NumericUpDown numericUpDownLimitY;
